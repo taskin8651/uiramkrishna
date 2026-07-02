@@ -28,6 +28,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     // Audit Logs
     Route::resource('audit-logs', 'AuditLogsController', ['except' => ['create', 'store', 'edit', 'update', 'destroy']]);
 
+        // College About Page
+    Route::get('college-about-page', 'CollegeAboutPageController@edit')->name('college-about-page.edit');
+    Route::put('college-about-page', 'CollegeAboutPageController@update')->name('college-about-page.update');
     
 });
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {
@@ -40,3 +43,5 @@ Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 
     }
 });
 
+// Frontend routes
+Route::get('/about-us', 'Frontend\PageController@about')->name('frontend.about');

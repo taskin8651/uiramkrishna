@@ -110,6 +110,49 @@
 
         <div class="nav-divider"></div>
 
+        {{-- WEBSITE CONTENT GROUP --}}
+@can('college_about_page_access')
+    @php
+        $contentActive = request()->is('admin/college-about-page*');
+    @endphp
+
+    <div x-data="{ open: {{ $contentActive ? 'true' : 'false' }} }">
+
+        <button type="button"
+                @click="open = !open"
+                data-tooltip="Website Content"
+                class="nav-link nav-group-btn {{ $contentActive ? 'active' : '' }}">
+
+            <div class="nav-group-left">
+                <i class="fas fa-globe nav-icon"></i>
+                <span class="nav-label">About Us</span>
+            </div>
+
+            <i class="fas fa-chevron-right chevron"
+               :style="open ? 'transform:rotate(90deg)' : ''"></i>
+        </button>
+
+        <div class="submenu"
+             x-show="open"
+             x-transition:enter="transition ease-out duration-150"
+             x-transition:enter-start="opacity-0 -translate-y-1"
+             x-transition:enter-end="opacity-100 translate-y-0"
+             x-transition:leave="transition ease-in duration-100"
+             x-transition:leave-start="opacity-100 translate-y-0"
+             x-transition:leave-end="opacity-0 -translate-y-1">
+
+            <a href="{{ route('admin.college-about-page.edit') }}"
+               class="sub-link {{ request()->is('admin/college-about-page*') ? 'active' : '' }}">
+                <i class="fas fa-university"></i>
+                College About Page
+            </a>
+
+        </div>
+    </div>
+
+    <div class="nav-divider"></div>
+@endcan
+
         <p class="sidebar-section-title compact nav-label">Account</p>
 
         {{-- Change Password --}}
