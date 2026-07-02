@@ -33,8 +33,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::put('college-about-page', 'CollegeAboutPageController@update')->name('college-about-page.update');
     
     Route::get('college-principal-message', 'CollegePrincipalMessageController@edit')->name('college-principal-message.edit');
-Route::put('college-principal-message', 'CollegePrincipalMessageController@update')->name('college-principal-message.update');
-});
+    Route::put('college-principal-message', 'CollegePrincipalMessageController@update')->name('college-principal-message.update');
+    // Ex Principals
+Route::delete('college-ex-principals/destroy', 'CollegeExPrincipalController@massDestroy')->name('college-ex-principals.massDestroy');
+Route::resource('college-ex-principals', 'CollegeExPrincipalController');
+    });
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {
     // Change password
     if (file_exists(app_path('Http/Controllers/Auth/ChangePasswordController.php'))) {
@@ -48,3 +51,4 @@ Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 
 // Frontend routes
 Route::get('/about-us', 'Frontend\PageController@about')->name('frontend.about');
 Route::get('/principal-message', 'Frontend\PageController@principalMessage')->name('frontend.principal-message');
+Route::get('/ex-principals', 'Frontend\PageController@exPrincipals')->name('frontend.ex-principals');

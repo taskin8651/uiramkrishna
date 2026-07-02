@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\CollegeAboutPage;
 use App\Models\CollegePrincipalMessage;
+use App\Models\CollegeExPrincipal;
 
 class PageController extends Controller
 {
@@ -21,4 +22,14 @@ class PageController extends Controller
 
         return view('frontend.principal-message', compact('principal'));
     }
+
+    public function exPrincipals()
+{
+    $exPrincipals = CollegeExPrincipal::where('status', true)
+        ->orderBy('sort_order')
+        ->orderBy('id')
+        ->get();
+
+    return view('frontend.ex-principals', compact('exPrincipals'));
+}
 }

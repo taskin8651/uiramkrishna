@@ -113,7 +113,8 @@
        {{-- WEBSITE CONTENT GROUP --}}
 @php
     $contentActive = request()->is('admin/college-about-page*')
-        || request()->is('admin/college-principal-message*');
+        || request()->is('admin/college-principal-message*')
+        || request()->is('admin/college-ex-principals*');
 @endphp
 
 <div x-data="{ open: {{ $contentActive ? 'true' : 'false' }} }">
@@ -156,6 +157,13 @@
                 Principal Message
             </a>
         @endcan
+        @can('college_ex_principal_access')
+    <a href="{{ route('admin.college-ex-principals.index') }}"
+       class="sub-link {{ request()->is('admin/college-ex-principals*') ? 'active' : '' }}">
+        <i class="fas fa-list-ol"></i>
+        Ex Principals
+    </a>
+@endcan
 
     </div>
 </div>
