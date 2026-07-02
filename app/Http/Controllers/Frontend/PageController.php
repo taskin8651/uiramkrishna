@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\CollegeAboutPage;
 use App\Models\CollegePrincipalMessage;
 use App\Models\CollegeExPrincipal;
+use App\Models\CollegeVisionMissionPage;
 
 class PageController extends Controller
 {
@@ -31,5 +32,12 @@ class PageController extends Controller
         ->get();
 
     return view('frontend.ex-principals', compact('exPrincipals'));
+}
+
+public function visionMission()
+{
+    $visionMission = CollegeVisionMissionPage::where('status', true)->first();
+
+    return view('frontend.vision-mission', compact('visionMission'));
 }
 }

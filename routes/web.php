@@ -37,6 +37,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     // Ex Principals
 Route::delete('college-ex-principals/destroy', 'CollegeExPrincipalController@massDestroy')->name('college-ex-principals.massDestroy');
 Route::resource('college-ex-principals', 'CollegeExPrincipalController');
+// College Vision Mission Page
+Route::get('college-vision-mission-page', 'CollegeVisionMissionPageController@edit')->name('college-vision-mission-page.edit');
+Route::put('college-vision-mission-page', 'CollegeVisionMissionPageController@update')->name('college-vision-mission-page.update');
     });
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {
     // Change password
@@ -52,3 +55,4 @@ Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 
 Route::get('/about-us', 'Frontend\PageController@about')->name('frontend.about');
 Route::get('/principal-message', 'Frontend\PageController@principalMessage')->name('frontend.principal-message');
 Route::get('/ex-principals', 'Frontend\PageController@exPrincipals')->name('frontend.ex-principals');
+Route::get('/vision-mission', 'Frontend\PageController@visionMission')->name('frontend.vision-mission');

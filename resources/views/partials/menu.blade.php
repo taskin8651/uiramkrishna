@@ -114,7 +114,8 @@
 @php
     $contentActive = request()->is('admin/college-about-page*')
         || request()->is('admin/college-principal-message*')
-        || request()->is('admin/college-ex-principals*');
+        || request()->is('admin/college-ex-principals*')
+        || request()->is('admin/college-vision-mission-page*');
 @endphp
 
 <div x-data="{ open: {{ $contentActive ? 'true' : 'false' }} }">
@@ -164,7 +165,13 @@
         Ex Principals
     </a>
 @endcan
-
+@can('college_vision_mission_page_access')
+    <a href="{{ route('admin.college-vision-mission-page.edit') }}"
+       class="sub-link {{ request()->is('admin/college-vision-mission-page*') ? 'active' : '' }}">
+        <i class="fas fa-bullseye"></i>
+        Vision & Mission
+    </a>
+@endcan
     </div>
 </div>
 
