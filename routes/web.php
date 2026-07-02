@@ -32,6 +32,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::get('college-about-page', 'CollegeAboutPageController@edit')->name('college-about-page.edit');
     Route::put('college-about-page', 'CollegeAboutPageController@update')->name('college-about-page.update');
     
+    Route::get('college-principal-message', 'CollegePrincipalMessageController@edit')->name('college-principal-message.edit');
+Route::put('college-principal-message', 'CollegePrincipalMessageController@update')->name('college-principal-message.update');
 });
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {
     // Change password
@@ -45,3 +47,4 @@ Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 
 
 // Frontend routes
 Route::get('/about-us', 'Frontend\PageController@about')->name('frontend.about');
+Route::get('/principal-message', 'Frontend\PageController@principalMessage')->name('frontend.principal-message');
