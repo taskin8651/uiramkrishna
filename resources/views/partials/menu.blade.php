@@ -188,7 +188,8 @@
         || request()->is('admin/staff-members*')
         || request()->is('admin/download-categories*')
         || request()->is('admin/download-items*')
-        || request()->is('admin/academic-info-pages*');
+        || request()->is('admin/academic-info-pages*')
+        || request()->is('admin/campus-facilities*');
 @endphp
 
 @can('academic_course_page_access')
@@ -289,11 +290,21 @@
                 </a>
             @endcan
 
+            @can('campus_facility_access')
+    <a href="{{ route('admin.campus-facilities.index') }}"
+       class="sub-link {{ request()->is('admin/campus-facilities*') ? 'active' : '' }}">
+        <i class="fas fa-building"></i>
+        Campus Facilities
+    </a>
+@endcan
+
         </div>
     </div>
 
     <div class="nav-divider"></div>
 @endcan
+
+
 
         <p class="sidebar-section-title compact nav-label">Account</p>
 
