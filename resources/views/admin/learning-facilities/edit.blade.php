@@ -19,10 +19,23 @@
 
     for ($i = count($galleryRows); $i < 10; $i++) {
         $galleryRows[] = [
+            'type' => 'image',
             'image_url' => '',
             'image_alt' => '',
             'title' => '',
             'size_class' => '',
+            'link_url' => '',
+            'icon' => '',
+            'subtitle' => '',
+        ];
+    }
+
+    $detailRows = old('detail_items', $learningFacility->detail_items ?? []);
+
+    for ($i = count($detailRows); $i < 4; $i++) {
+        $detailRows[] = [
+            'title' => '',
+            'description' => '',
         ];
     }
 @endphp
@@ -96,7 +109,7 @@
                                class="field-input {{ $errors->has('css_prefix') ? 'error' : '' }}">
                     </div>
 
-                    <p class="field-hint">Example: comp, elib, library, ict</p>
+                    <p class="field-hint">Example: comp, elib, library, ict, phy, psy, geo, bsit, bca, zoo, botany, chem</p>
                 </div>
 
                 <div class="field-group">
@@ -370,7 +383,7 @@
                                 <input type="text"
                                        name="features[{{ $i }}][icon]"
                                        value="{{ data_get($feature, 'icon') }}"
-                                       placeholder="bi bi-pc-display-horizontal"
+                                       placeholder="bi bi-bezier2"
                                        class="field-input">
                             </div>
                         </div>
@@ -384,7 +397,7 @@
                                 <input type="text"
                                        name="features[{{ $i }}][title]"
                                        value="{{ data_get($feature, 'title') }}"
-                                       placeholder="Computer Access"
+                                       placeholder="Practical Experiments"
                                        class="field-input">
                             </div>
                         </div>
@@ -411,7 +424,7 @@
 
                 <div>
                     <p class="form-card-title">Gallery Content</p>
-                    <p class="form-card-subtitle">Gallery heading and image cards</p>
+                    <p class="form-card-subtitle">Gallery images and link visual cards</p>
                 </div>
             </div>
 
@@ -456,7 +469,24 @@
 
                 @foreach($galleryRows as $i => $item)
                     <div style="padding:14px;border:1px solid #e5e7eb;border-radius:16px;margin-bottom:14px;">
-                        <p class="field-label" style="margin-bottom:10px;">Gallery Image {{ $i + 1 }}</p>
+                        <p class="field-label" style="margin-bottom:10px;">Gallery Item {{ $i + 1 }}</p>
+
+                        <div class="field-group">
+                            <label class="field-label">Type</label>
+
+                            <div class="input-icon-wrap">
+                                <i class="fas fa-layer-group icon"></i>
+
+                                <select name="gallery_items[{{ $i }}][type]" class="field-input">
+                                    <option value="image" {{ data_get($item, 'type', 'image') == 'image' ? 'selected' : '' }}>
+                                        Image
+                                    </option>
+                                    <option value="link" {{ data_get($item, 'type') == 'link' ? 'selected' : '' }}>
+                                        Link Visual
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
 
                         <div class="field-group">
                             <label class="field-label">Image URL</label>
@@ -467,7 +497,7 @@
                                 <input type="text"
                                        name="gallery_items[{{ $i }}][image_url]"
                                        value="{{ data_get($item, 'image_url') }}"
-                                       placeholder="assets/img/elibrary_1.jpeg"
+                                       placeholder="https://example.com/image.jpeg"
                                        class="field-input">
                             </div>
                         </div>
@@ -481,7 +511,7 @@
                                 <input type="text"
                                        name="gallery_items[{{ $i }}][image_alt]"
                                        value="{{ data_get($item, 'image_alt') }}"
-                                       placeholder="Computer Room Image 1"
+                                       placeholder="Physics Lab Image 1"
                                        class="field-input">
                             </div>
                         </div>
@@ -495,7 +525,7 @@
                                 <input type="text"
                                        name="gallery_items[{{ $i }}][title]"
                                        value="{{ data_get($item, 'title') }}"
-                                       placeholder="Computer Room"
+                                       placeholder="Physics Lab View"
                                        class="field-input">
                             </div>
                         </div>
@@ -512,6 +542,152 @@
                                     <option value="wide" {{ data_get($item, 'size_class') == 'wide' ? 'selected' : '' }}>Wide</option>
                                 </select>
                             </div>
+                        </div>
+
+                        <div class="field-group">
+                            <label class="field-label">Link URL</label>
+
+                            <div class="input-icon-wrap">
+                                <i class="fas fa-link icon"></i>
+
+                                <input type="text"
+                                       name="gallery_items[{{ $i }}][link_url]"
+                                       value="{{ data_get($item, 'link_url') }}"
+                                       placeholder="chemistry-lab.html"
+                                       class="field-input">
+                            </div>
+
+                            <p class="field-hint">Only for Link Visual type.</p>
+                        </div>
+
+                        <div class="field-group">
+                            <label class="field-label">Link Icon</label>
+
+                            <div class="input-icon-wrap">
+                                <i class="fas fa-icons icon"></i>
+
+                                <input type="text"
+                                       name="gallery_items[{{ $i }}][icon]"
+                                       value="{{ data_get($item, 'icon') }}"
+                                       placeholder="bi bi-flask"
+                                       class="field-input">
+                            </div>
+                        </div>
+
+                        <div class="field-group">
+                            <label class="field-label">Subtitle</label>
+
+                            <div class="input-icon-wrap">
+                                <i class="fas fa-align-left icon"></i>
+
+                                <input type="text"
+                                       name="gallery_items[{{ $i }}][subtitle]"
+                                       value="{{ data_get($item, 'subtitle') }}"
+                                       placeholder="View related science laboratory"
+                                       class="field-input">
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+
+            </div>
+        </div>
+
+        {{-- DETAIL SECTION --}}
+        <div class="form-card">
+            <div class="form-card-header">
+                <div class="form-card-icon">
+                    <i class="fas fa-list-check"></i>
+                </div>
+
+                <div>
+                    <p class="form-card-title">Detail / Uses Section</p>
+                    <p class="form-card-subtitle">Optional section for lab uses and extra details</p>
+                </div>
+            </div>
+
+            <div class="form-card-body">
+
+                <div class="field-group">
+                    <label class="field-label">Detail Label</label>
+
+                    <div class="input-icon-wrap">
+                        <i class="fas fa-tag icon"></i>
+
+                        <input type="text"
+                               name="detail_label"
+                               value="{{ old('detail_label', $learningFacility->detail_label) }}"
+                               placeholder="Facility Uses"
+                               class="field-input">
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">Detail Title</label>
+
+                    <div class="input-icon-wrap">
+                        <i class="fas fa-heading icon"></i>
+
+                        <input type="text"
+                               name="detail_title"
+                               value="{{ old('detail_title', $learningFacility->detail_title) }}"
+                               placeholder="Geography Lab Uses"
+                               class="field-input">
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">Detail Button Text</label>
+
+                    <div class="input-icon-wrap">
+                        <i class="fas fa-mouse-pointer icon"></i>
+
+                        <input type="text"
+                               name="detail_button_text"
+                               value="{{ old('detail_button_text', $learningFacility->detail_button_text) }}"
+                               placeholder="Psychology Lab"
+                               class="field-input">
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">Detail Button URL</label>
+
+                    <div class="input-icon-wrap">
+                        <i class="fas fa-link icon"></i>
+
+                        <input type="text"
+                               name="detail_button_url"
+                               value="{{ old('detail_button_url', $learningFacility->detail_button_url) }}"
+                               placeholder="psychology-lab.html"
+                               class="field-input">
+                    </div>
+                </div>
+
+                @foreach($detailRows as $i => $detailItem)
+                    <div style="padding:14px;border:1px solid #e5e7eb;border-radius:16px;margin-bottom:14px;">
+                        <p class="field-label" style="margin-bottom:10px;">Use {{ $i + 1 }}</p>
+
+                        <div class="field-group">
+                            <label class="field-label">Title</label>
+
+                            <div class="input-icon-wrap">
+                                <i class="fas fa-heading icon"></i>
+
+                                <input type="text"
+                                       name="detail_items[{{ $i }}][title]"
+                                       value="{{ data_get($detailItem, 'title') }}"
+                                       placeholder="Map Practical"
+                                       class="field-input">
+                            </div>
+                        </div>
+
+                        <div class="field-group">
+                            <label class="field-label">Description</label>
+
+                            <textarea name="detail_items[{{ $i }}][description]"
+                                      rows="3"
+                                      class="field-textarea">{{ data_get($detailItem, 'description') }}</textarea>
                         </div>
                     </div>
                 @endforeach

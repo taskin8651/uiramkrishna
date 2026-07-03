@@ -33,7 +33,9 @@ class LearningFacilityController extends Controller
 
         $data = $this->validated($request);
 
-        $facility = LearningFacility::create(collect($data)->except('main_image')->toArray());
+        $facility = LearningFacility::create(
+            collect($data)->except('main_image')->toArray()
+        );
 
         if ($request->hasFile('main_image')) {
             $facility
@@ -59,7 +61,9 @@ class LearningFacilityController extends Controller
 
         $data = $this->validated($request, $learningFacility->id);
 
-        $learningFacility->update(collect($data)->except('main_image')->toArray());
+        $learningFacility->update(
+            collect($data)->except('main_image')->toArray()
+        );
 
         if ($request->hasFile('main_image')) {
             $learningFacility->clearMediaCollection('main_image');
@@ -122,20 +126,33 @@ class LearningFacilityController extends Controller
             'button_url'      => 'nullable|string|max:500',
             'button_external' => 'nullable|boolean',
 
-            'features'                 => 'nullable|array',
-            'features.*.icon'          => 'nullable|string|max:255',
-            'features.*.title'         => 'nullable|string|max:255',
-            'features.*.description'   => 'nullable|string|max:500',
+            'features'               => 'nullable|array',
+            'features.*.icon'        => 'nullable|string|max:255',
+            'features.*.title'       => 'nullable|string|max:255',
+            'features.*.description' => 'nullable|string|max:500',
 
             'gallery_label'       => 'nullable|string|max:255',
             'gallery_title'       => 'nullable|string|max:255',
             'gallery_description' => 'nullable|string',
 
-            'gallery_items'               => 'nullable|array',
-            'gallery_items.*.image_url'   => 'nullable|string|max:1000',
-            'gallery_items.*.image_alt'   => 'nullable|string|max:255',
-            'gallery_items.*.title'       => 'nullable|string|max:255',
-            'gallery_items.*.size_class'  => 'nullable|string|max:50',
+            'gallery_items'              => 'nullable|array',
+            'gallery_items.*.type'       => 'nullable|in:image,link',
+            'gallery_items.*.image_url'  => 'nullable|string|max:1000',
+            'gallery_items.*.image_alt'  => 'nullable|string|max:255',
+            'gallery_items.*.title'      => 'nullable|string|max:255',
+            'gallery_items.*.size_class' => 'nullable|string|max:50',
+            'gallery_items.*.link_url'   => 'nullable|string|max:1000',
+            'gallery_items.*.icon'       => 'nullable|string|max:255',
+            'gallery_items.*.subtitle'   => 'nullable|string|max:255',
+
+            'detail_label'       => 'nullable|string|max:255',
+            'detail_title'       => 'nullable|string|max:255',
+            'detail_button_text' => 'nullable|string|max:255',
+            'detail_button_url'  => 'nullable|string|max:500',
+
+            'detail_items'               => 'nullable|array',
+            'detail_items.*.title'       => 'nullable|string|max:255',
+            'detail_items.*.description' => 'nullable|string|max:500',
 
             'main_image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:4096',
             'status'     => 'nullable|boolean',
@@ -146,14 +163,31 @@ class LearningFacilityController extends Controller
 
         $data['features'] = collect($request->features ?? [])
             ->filter(function ($item) {
-                return filled($item['title'] ?? null) || filled($item['description'] ?? null);
+                return filled($item['title'] ?? null)
+                    || filled($item['description'] ?? null)
+                    || filled($item['icon'] ?? null);
             })
             ->values()
             ->all();
 
         $data['gallery_items'] = collect($request->gallery_items ?? [])
+            ->map(function ($item) {
+                $item['type'] = $item['type'] ?? 'image';
+                return $item;
+            })
             ->filter(function ($item) {
-                return filled($item['image_url'] ?? null) || filled($item['title'] ?? null);
+                return filled($item['image_url'] ?? null)
+                    || filled($item['link_url'] ?? null)
+                    || filled($item['title'] ?? null)
+                    || filled($item['subtitle'] ?? null);
+            })
+            ->values()
+            ->all();
+
+        $data['detail_items'] = collect($request->detail_items ?? [])
+            ->filter(function ($item) {
+                return filled($item['title'] ?? null)
+                    || filled($item['description'] ?? null);
             })
             ->values()
             ->all();

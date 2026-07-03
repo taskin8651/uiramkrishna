@@ -136,3 +136,12 @@ Route::get('/computer-room', 'Frontend\LearningFacilityController@computerRoom')
 Route::get('/e-library', 'Frontend\LearningFacilityController@eLibrary')->name('frontend.e-library');
 Route::get('/library', 'Frontend\LearningFacilityController@library')->name('frontend.library');
 Route::get('/ict-training-center', 'Frontend\LearningFacilityController@ictTrainingCenter')->name('frontend.ict-training-center');
+
+Route::get('/physics-lab', 'Frontend\LearningFacilityController@physicsLab')->name('frontend.physics-lab');
+Route::get('/psychology-lab', 'Frontend\LearningFacilityController@psychologyLab')->name('frontend.psychology-lab');
+Route::get('/geography-lab', 'Frontend\LearningFacilityController@geographyLab')->name('frontend.geography-lab');
+Route::get('/bsc-it-lab', 'Frontend\LearningFacilityController@bscItLab')->name('frontend.bsc-it-lab');
+Route::get('/bca-lab', 'Frontend\LearningFacilityController@bcaLab')->name('frontend.bca-lab');
+Route::get('/zoology-lab', 'Frontend\LearningFacilityController@zoologyLab')->name('frontend.zoology-lab');
+Route::get('/botany-lab', 'Frontend\LearningFacilityController@botanyLab')->name('frontend.botany-lab');
+Route::get('/chemistry-lab', 'Frontend\LearningFacilityController@chemistryLab')->name('frontend.chemistry-lab');

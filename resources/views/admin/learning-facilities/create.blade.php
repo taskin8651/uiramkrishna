@@ -48,7 +48,7 @@
                                id="slug"
                                value="{{ old('slug') }}"
                                required
-                               placeholder="computer-room"
+                               placeholder="physics-lab"
                                class="field-input {{ $errors->has('slug') ? 'error' : '' }}">
                     </div>
 
@@ -58,7 +58,9 @@
                             {{ $errors->first('slug') }}
                         </p>
                     @else
-                        <p class="field-hint">Example: computer-room, e-library, library, ict-training-center</p>
+                        <p class="field-hint">
+                            Example: computer-room, e-library, library, ict-training-center, physics-lab, chemistry-lab
+                        </p>
                     @endif
                 </div>
 
@@ -72,11 +74,13 @@
                                name="css_prefix"
                                id="css_prefix"
                                value="{{ old('css_prefix') }}"
-                               placeholder="comp"
+                               placeholder="phy"
                                class="field-input {{ $errors->has('css_prefix') ? 'error' : '' }}">
                     </div>
 
-                    <p class="field-hint">Example: comp, elib, library, ict</p>
+                    <p class="field-hint">
+                        Example: comp, elib, library, ict, phy, psy, geo, bsit, bca, zoo, botany, chem
+                    </p>
                 </div>
 
                 <div class="field-group">
@@ -89,7 +93,7 @@
                                name="hero_icon"
                                id="hero_icon"
                                value="{{ old('hero_icon') }}"
-                               placeholder="bi bi-pc-display-horizontal"
+                               placeholder="bi bi-flask"
                                class="field-input">
                     </div>
                 </div>
@@ -119,7 +123,7 @@
                                name="hero_title"
                                id="hero_title"
                                value="{{ old('hero_title') }}"
-                               placeholder="Computer Room"
+                               placeholder="Physics Lab"
                                class="field-input">
                     </div>
                 </div>
@@ -130,6 +134,7 @@
                     <textarea name="hero_description"
                               id="hero_description"
                               rows="4"
+                              placeholder="Enter hero description"
                               class="field-textarea">{{ old('hero_description') }}</textarea>
                 </div>
 
@@ -179,7 +184,7 @@
                                name="image_badge"
                                id="image_badge"
                                value="{{ old('image_badge') }}"
-                               placeholder="Digital Infrastructure"
+                               placeholder="Official Physics Lab"
                                class="field-input">
                     </div>
                 </div>
@@ -194,7 +199,7 @@
                                name="image_alt"
                                id="image_alt"
                                value="{{ old('image_alt') }}"
-                               placeholder="RKD College Computer Room"
+                               placeholder="RKD College Physics Lab"
                                class="field-input">
                     </div>
                 </div>
@@ -209,7 +214,7 @@
                                name="image_title"
                                id="image_title"
                                value="{{ old('image_title') }}"
-                               placeholder="Computer Lab Support"
+                               placeholder="Practical Science Learning"
                                class="field-input">
                     </div>
                 </div>
@@ -220,6 +225,7 @@
                     <textarea name="image_description"
                               id="image_description"
                               rows="4"
+                              placeholder="Enter image card description"
                               class="field-textarea">{{ old('image_description') }}</textarea>
                 </div>
 
@@ -266,7 +272,7 @@
                                name="panel_title"
                                id="panel_title"
                                value="{{ old('panel_title') }}"
-                               placeholder="Digital Learning & Internet Facility"
+                               placeholder="Physics Practical & Experiment Facility"
                                class="field-input">
                     </div>
                 </div>
@@ -277,6 +283,7 @@
                     <textarea name="lead_description"
                               id="lead_description"
                               rows="6"
+                              placeholder="Enter overview description"
                               class="field-textarea">{{ old('lead_description') }}</textarea>
                 </div>
 
@@ -290,7 +297,7 @@
                                name="button_text"
                                id="button_text"
                                value="{{ old('button_text') }}"
-                               placeholder="ICT Training"
+                               placeholder="Science Dept."
                                class="field-input">
                     </div>
                 </div>
@@ -305,7 +312,7 @@
                                name="button_url"
                                id="button_url"
                                value="{{ old('button_url') }}"
-                               placeholder="ict-training-center.html"
+                               placeholder="departments.html"
                                class="field-input">
                     </div>
                 </div>
@@ -352,7 +359,7 @@
                                 <input type="text"
                                        name="features[{{ $i }}][icon]"
                                        value="{{ old('features.' . $i . '.icon') }}"
-                                       placeholder="bi bi-pc-display-horizontal"
+                                       placeholder="bi bi-bezier2"
                                        class="field-input">
                             </div>
                         </div>
@@ -366,7 +373,7 @@
                                 <input type="text"
                                        name="features[{{ $i }}][title]"
                                        value="{{ old('features.' . $i . '.title') }}"
-                                       placeholder="Computer Access"
+                                       placeholder="Practical Experiments"
                                        class="field-input">
                             </div>
                         </div>
@@ -376,6 +383,7 @@
 
                             <textarea name="features[{{ $i }}][description]"
                                       rows="3"
+                                      placeholder="Enter feature description"
                                       class="field-textarea">{{ old('features.' . $i . '.description') }}</textarea>
                         </div>
                     </div>
@@ -393,7 +401,7 @@
 
                 <div>
                     <p class="form-card-title">Gallery Content</p>
-                    <p class="form-card-subtitle">Gallery heading and image cards</p>
+                    <p class="form-card-subtitle">Gallery images and link visual cards</p>
                 </div>
             </div>
 
@@ -409,7 +417,7 @@
                                name="gallery_label"
                                id="gallery_label"
                                value="{{ old('gallery_label') }}"
-                               placeholder="Computer Room Gallery"
+                               placeholder="Physics Lab Gallery"
                                class="field-input">
                     </div>
                 </div>
@@ -424,7 +432,7 @@
                                name="gallery_title"
                                id="gallery_title"
                                value="{{ old('gallery_title') }}"
-                               placeholder="Digital Learning Images"
+                               placeholder="Official Lab Images"
                                class="field-input">
                     </div>
                 </div>
@@ -435,12 +443,30 @@
                     <textarea name="gallery_description"
                               id="gallery_description"
                               rows="4"
+                              placeholder="Enter gallery description"
                               class="field-textarea">{{ old('gallery_description') }}</textarea>
                 </div>
 
                 @for($i = 0; $i < 10; $i++)
                     <div style="padding:14px;border:1px solid #e5e7eb;border-radius:16px;margin-bottom:14px;">
-                        <p class="field-label" style="margin-bottom:10px;">Gallery Image {{ $i + 1 }}</p>
+                        <p class="field-label" style="margin-bottom:10px;">Gallery Item {{ $i + 1 }}</p>
+
+                        <div class="field-group">
+                            <label class="field-label">Type</label>
+
+                            <div class="input-icon-wrap">
+                                <i class="fas fa-layer-group icon"></i>
+
+                                <select name="gallery_items[{{ $i }}][type]" class="field-input">
+                                    <option value="image" {{ old('gallery_items.' . $i . '.type', 'image') == 'image' ? 'selected' : '' }}>
+                                        Image
+                                    </option>
+                                    <option value="link" {{ old('gallery_items.' . $i . '.type') == 'link' ? 'selected' : '' }}>
+                                        Link Visual
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
 
                         <div class="field-group">
                             <label class="field-label">Image URL</label>
@@ -451,7 +477,7 @@
                                 <input type="text"
                                        name="gallery_items[{{ $i }}][image_url]"
                                        value="{{ old('gallery_items.' . $i . '.image_url') }}"
-                                       placeholder="assets/img/elibrary_1.jpeg"
+                                       placeholder="https://example.com/image.jpeg"
                                        class="field-input">
                             </div>
                         </div>
@@ -465,7 +491,7 @@
                                 <input type="text"
                                        name="gallery_items[{{ $i }}][image_alt]"
                                        value="{{ old('gallery_items.' . $i . '.image_alt') }}"
-                                       placeholder="Computer Room Image 1"
+                                       placeholder="Physics Lab Image 1"
                                        class="field-input">
                             </div>
                         </div>
@@ -479,7 +505,7 @@
                                 <input type="text"
                                        name="gallery_items[{{ $i }}][title]"
                                        value="{{ old('gallery_items.' . $i . '.title') }}"
-                                       placeholder="Computer Room"
+                                       placeholder="Physics Lab View"
                                        class="field-input">
                             </div>
                         </div>
@@ -497,9 +523,183 @@
                                 </select>
                             </div>
                         </div>
+
+                        <div class="field-group">
+                            <label class="field-label">Link URL</label>
+
+                            <div class="input-icon-wrap">
+                                <i class="fas fa-link icon"></i>
+
+                                <input type="text"
+                                       name="gallery_items[{{ $i }}][link_url]"
+                                       value="{{ old('gallery_items.' . $i . '.link_url') }}"
+                                       placeholder="chemistry-lab.html"
+                                       class="field-input">
+                            </div>
+
+                            <p class="field-hint">Only for Link Visual type.</p>
+                        </div>
+
+                        <div class="field-group">
+                            <label class="field-label">Link Icon</label>
+
+                            <div class="input-icon-wrap">
+                                <i class="fas fa-icons icon"></i>
+
+                                <input type="text"
+                                       name="gallery_items[{{ $i }}][icon]"
+                                       value="{{ old('gallery_items.' . $i . '.icon') }}"
+                                       placeholder="bi bi-flask"
+                                       class="field-input">
+                            </div>
+                        </div>
+
+                        <div class="field-group">
+                            <label class="field-label">Subtitle</label>
+
+                            <div class="input-icon-wrap">
+                                <i class="fas fa-align-left icon"></i>
+
+                                <input type="text"
+                                       name="gallery_items[{{ $i }}][subtitle]"
+                                       value="{{ old('gallery_items.' . $i . '.subtitle') }}"
+                                       placeholder="View related science laboratory"
+                                       class="field-input">
+                            </div>
+                        </div>
                     </div>
                 @endfor
 
+            </div>
+        </div>
+
+        {{-- DETAIL SECTION --}}
+        <div class="form-card">
+            <div class="form-card-header">
+                <div class="form-card-icon">
+                    <i class="fas fa-list-check"></i>
+                </div>
+
+                <div>
+                    <p class="form-card-title">Detail / Uses Section</p>
+                    <p class="form-card-subtitle">Optional section for lab uses and extra details</p>
+                </div>
+            </div>
+
+            <div class="form-card-body">
+
+                <div class="field-group">
+                    <label class="field-label">Detail Label</label>
+
+                    <div class="input-icon-wrap">
+                        <i class="fas fa-tag icon"></i>
+
+                        <input type="text"
+                               name="detail_label"
+                               value="{{ old('detail_label') }}"
+                               placeholder="Facility Uses"
+                               class="field-input">
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">Detail Title</label>
+
+                    <div class="input-icon-wrap">
+                        <i class="fas fa-heading icon"></i>
+
+                        <input type="text"
+                               name="detail_title"
+                               value="{{ old('detail_title') }}"
+                               placeholder="Geography Lab Uses"
+                               class="field-input">
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">Detail Button Text</label>
+
+                    <div class="input-icon-wrap">
+                        <i class="fas fa-mouse-pointer icon"></i>
+
+                        <input type="text"
+                               name="detail_button_text"
+                               value="{{ old('detail_button_text') }}"
+                               placeholder="Psychology Lab"
+                               class="field-input">
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">Detail Button URL</label>
+
+                    <div class="input-icon-wrap">
+                        <i class="fas fa-link icon"></i>
+
+                        <input type="text"
+                               name="detail_button_url"
+                               value="{{ old('detail_button_url') }}"
+                               placeholder="psychology-lab.html"
+                               class="field-input">
+                    </div>
+                </div>
+
+                @for($i = 0; $i < 4; $i++)
+                    <div style="padding:14px;border:1px solid #e5e7eb;border-radius:16px;margin-bottom:14px;">
+                        <p class="field-label" style="margin-bottom:10px;">Use {{ $i + 1 }}</p>
+
+                        <div class="field-group">
+                            <label class="field-label">Title</label>
+
+                            <div class="input-icon-wrap">
+                                <i class="fas fa-heading icon"></i>
+
+                                <input type="text"
+                                       name="detail_items[{{ $i }}][title]"
+                                       value="{{ old('detail_items.' . $i . '.title') }}"
+                                       placeholder="Map Practical"
+                                       class="field-input">
+                            </div>
+                        </div>
+
+                        <div class="field-group">
+                            <label class="field-label">Description</label>
+
+                            <textarea name="detail_items[{{ $i }}][description]"
+                                      rows="3"
+                                      placeholder="Enter use description"
+                                      class="field-textarea">{{ old('detail_items.' . $i . '.description') }}</textarea>
+                        </div>
+                    </div>
+                @endfor
+
+            </div>
+        </div>
+
+        {{-- STATUS --}}
+        <div class="form-card">
+            <div class="form-card-header">
+                <div class="form-card-icon">
+                    <i class="fas fa-toggle-on"></i>
+                </div>
+
+                <div>
+                    <p class="form-card-title">Publish Settings</p>
+                    <p class="form-card-subtitle">Control frontend visibility</p>
+                </div>
+            </div>
+
+            <div class="form-card-body">
+                <label class="role-checkbox-item {{ old('status', true) ? 'checked' : '' }}">
+                    <input type="checkbox"
+                           name="status"
+                           value="1"
+                           class="role-checkbox"
+                           {{ old('status', true) ? 'checked' : '' }}>
+
+                    <div class="check-icon"></div>
+                    <span class="checkbox-text">Show on website</span>
+                </label>
             </div>
         </div>
 

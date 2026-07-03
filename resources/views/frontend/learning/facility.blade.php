@@ -3,226 +3,68 @@
 @section('content')
 
 @php
-    $slug = $slug ?? optional($facility)->slug ?? 'computer-room';
+    $slug = $slug ?? optional($facility)->slug ?? 'physics-lab';
 
-    $fallbacks = [
-        'computer-room' => [
-            'prefix' => 'comp',
-
-            'hero_icon' => 'bi bi-pc-display-horizontal',
-            'hero_kicker' => 'Learning Facility',
-            'hero_title' => 'Computer Room',
-            'hero_description' => 'Computer Room facility of Ram Krishna Dwarika College, Patna for ICT learning, practical exposure, internet-based academic access and digital student support.',
-
-            'image' => 'assets/img/elibrary_1.jpeg',
-            'image_badge' => 'Digital Infrastructure',
-            'image_alt' => 'RKD College Computer Room',
-            'image_title' => 'Computer Lab Support',
-            'image_description' => 'Computer Room supports ICT learning, practical exposure, internet-based academic access and digital student support.',
-
-            'panel_subtitle' => 'Facility Overview',
-            'panel_title' => 'Digital Learning & Internet Facility',
-            'lead_description' => 'The Computer Room is an important digital infrastructure facility of the college. It supports computer-based learning, practical sessions, online academic resources, e-content access and student digital skill development.',
-
-            'button_text' => 'ICT Training',
-            'button_url' => 'ict-training-center.html',
-            'button_external' => false,
-
-            'features' => [
-                ['icon' => 'bi bi-pc-display-horizontal', 'title' => 'Computer Access', 'description' => 'Supports students with computer-based academic and practical work.'],
-                ['icon' => 'bi bi-wifi', 'title' => 'Internet Facility', 'description' => 'Useful for accessing e-books, e-journals and digital study materials.'],
-                ['icon' => 'bi bi-file-earmark-text-fill', 'title' => 'E-Content Support', 'description' => 'Helps students access online contents and course-related resources.'],
-                ['icon' => 'bi bi-mortarboard-fill', 'title' => 'Digital Skill Learning', 'description' => 'Supports computer literacy, ICT learning and academic preparation.'],
-            ],
-
-            'gallery_label' => 'Computer Room Gallery',
-            'gallery_title' => 'Digital Learning Images',
-            'gallery_description' => 'Use local optimized images here. Replace these paths with actual computer room images when available from college.',
-
-            'gallery_items' => [
-                ['image_url' => 'assets/img/elibrary_1.jpeg', 'image_alt' => 'Computer Room Image 1', 'title' => 'Computer Room', 'size_class' => 'large'],
-                ['image_url' => 'assets/img/elibrary_2.jpeg', 'image_alt' => 'Computer Room Image 2', 'title' => 'Digital Lab', 'size_class' => ''],
-                ['image_url' => 'assets/img/lib_16.jpeg', 'image_alt' => 'Computer Room Image 3', 'title' => 'ICT Learning', 'size_class' => ''],
-                ['image_url' => 'assets/img/lib_24.jpeg', 'image_alt' => 'Computer Room Image 4', 'title' => 'Online Resources', 'size_class' => ''],
-                ['image_url' => 'assets/img/infrastructure/computer-room-5.jpg', 'image_alt' => 'Computer Room Image 5', 'title' => 'Practical Work', 'size_class' => ''],
-                ['image_url' => 'https://rkdcollegepatna.org/Facilities/library_01.jpeg', 'image_alt' => 'Digital Resource Image', 'title' => 'Digital Resource Support', 'size_class' => 'wide'],
-                ['image_url' => 'https://rkdcollegepatna.org/Facilities/library_02.jpeg', 'image_alt' => 'Library Resource Image', 'title' => 'Learning Resource', 'size_class' => ''],
-                ['image_url' => 'https://rkdcollegepatna.org/Facilities/library_03.jpeg', 'image_alt' => 'Study Material Image', 'title' => 'Study Material', 'size_class' => ''],
-            ],
-        ],
-
-        'e-library' => [
-            'prefix' => 'elib',
-
-            'hero_icon' => 'bi bi-journal-bookmark-fill',
-            'hero_kicker' => 'Learning Facility',
-            'hero_title' => 'E-Library',
-            'hero_description' => 'E-Library facility of Ram Krishna Dwarika College, Patna for online resources, e-books, study materials and academic references.',
-
-            'image' => 'https://rkdcollegepatna.org/Facilities/library_01.jpeg',
-            'image_badge' => 'Digital Learning Facility',
-            'image_alt' => 'RKD College E Library',
-            'image_title' => 'Online Library Support',
-            'image_description' => 'E-Library supports digital academic access through online resources, e-books, study materials and learning references.',
-
-            'panel_subtitle' => 'Facility Overview',
-            'panel_title' => 'Digital Resources & E-Books Access',
-            'lead_description' => 'The E-Library page is part of the college infrastructure section and supports online academic learning. Students can use digital resources, e-books, study material, teaching schedules and academic references for better preparation.',
-
-            'button_text' => 'Official Page',
-            'button_url' => 'https://rkdcollegepatna.org/ELibrary.aspx',
-            'button_external' => true,
-
-            'features' => [
-                ['icon' => 'bi bi-book-fill', 'title' => 'E-Books Access', 'description' => 'Digital books and online academic references support student learning.'],
-                ['icon' => 'bi bi-file-earmark-text-fill', 'title' => 'Study Materials', 'description' => 'Helpful for assignments, examination preparation and course reference.'],
-                ['icon' => 'bi bi-wifi', 'title' => 'Internet Facility', 'description' => 'Online access helps students explore digital academic resources.'],
-                ['icon' => 'bi bi-laptop-fill', 'title' => 'Digital Learning', 'description' => 'Supports e-learning resources and modern academic preparation.'],
-            ],
-
-            'gallery_label' => 'Library Gallery',
-            'gallery_title' => 'E-Library & Library Images',
-            'gallery_description' => 'Official library images are used here to present the learning environment. These can be optimized later into local assets.',
-
-            'gallery_items' => [
-                ['image_url' => 'https://rkdcollegepatna.org/Facilities/library_01.jpeg', 'image_alt' => 'E Library Image 1', 'title' => 'Digital Learning Area', 'size_class' => 'large'],
-                ['image_url' => 'https://rkdcollegepatna.org/Facilities/library_02.jpeg', 'image_alt' => 'E Library Image 2', 'title' => 'Library Collection', 'size_class' => ''],
-                ['image_url' => 'https://rkdcollegepatna.org/Facilities/library_03.jpeg', 'image_alt' => 'E Library Image 3', 'title' => 'Study Resource Area', 'size_class' => ''],
-                ['image_url' => 'https://rkdcollegepatna.org/Facilities/lib_10.jpeg', 'image_alt' => 'E Library Image 4', 'title' => 'Library View', 'size_class' => ''],
-                ['image_url' => 'https://rkdcollegepatna.org/Facilities/lib_11.jpeg', 'image_alt' => 'E Library Image 5', 'title' => 'Reading Facility', 'size_class' => ''],
-                ['image_url' => 'https://rkdcollegepatna.org/Facilities/lib_12.jpeg', 'image_alt' => 'E Library Image 6', 'title' => 'Book Rack & Resources', 'size_class' => 'wide'],
-                ['image_url' => 'https://rkdcollegepatna.org/Facilities/lib_13.jpeg', 'image_alt' => 'E Library Image 7', 'title' => 'Library Facility', 'size_class' => ''],
-                ['image_url' => 'https://rkdcollegepatna.org/Facilities/lib_14.jpeg', 'image_alt' => 'E Library Image 8', 'title' => 'Academic Resources', 'size_class' => ''],
-                ['image_url' => 'https://rkdcollegepatna.org/Facilities/lib_15.jpeg', 'image_alt' => 'E Library Image 9', 'title' => 'Study Space', 'size_class' => ''],
-                ['image_url' => 'https://rkdcollegepatna.org/Facilities/lib_16.jpeg', 'image_alt' => 'E Library Image 10', 'title' => 'Library Room', 'size_class' => ''],
-            ],
-        ],
-
-        'library' => [
-            'prefix' => 'library',
-
-            'hero_icon' => 'bi bi-book-half',
-            'hero_kicker' => 'Learning Facility',
-            'hero_title' => 'Library',
-            'hero_description' => 'Library facility of Ram Krishna Dwarika College, Patna for academic reading, reference support and book catalogue access.',
-
-            'image' => 'https://rkdcollegepatna.org/Facilities/lib_10.jpeg',
-            'image_badge' => 'Official Library Facility',
-            'image_alt' => 'RKD College Library',
-            'image_title' => 'College Library',
-            'image_description' => 'Official library page includes book catalogue download and multiple library facility images for student reference.',
-
-            'panel_subtitle' => 'Facility Overview',
-            'panel_title' => 'Academic Reading & Resource Centre',
-            'lead_description' => 'The Library is an important academic facility of the college. It supports students, teachers and researchers with books, reading space, reference resources and academic learning support. The official page also provides a downloadable list of books available in the library.',
-
-            'button_text' => 'Book Catalogue',
-            'button_url' => 'https://rkdcollegepatna.org/Downloads/merged_books_with_rack_and_language.xlsx',
-            'button_external' => true,
-
-            'features' => [
-                ['icon' => 'bi bi-book-fill', 'title' => 'Book Resources', 'description' => 'Book catalogue and library resources support student academic preparation.'],
-                ['icon' => 'bi bi-journal-bookmark-fill', 'title' => 'Reference Support', 'description' => 'Helpful for subject reference, reading and regular study work.'],
-                ['icon' => 'bi bi-people-fill', 'title' => 'Student Learning', 'description' => 'Supports UG, PG and vocational students in academic learning.'],
-                ['icon' => 'bi bi-file-earmark-spreadsheet-fill', 'title' => 'Book Catalogue', 'description' => 'Official Excel file is available for list of books in library.'],
-            ],
-
-            'gallery_label' => 'Library Gallery',
-            'gallery_title' => 'Library Images',
-            'gallery_description' => 'Official library page contains multiple library facility images. These images can be replaced later with local optimized assets.',
-
-            'gallery_items' => [
-                ['image_url' => 'https://rkdcollegepatna.org/Facilities/lib_10.jpeg', 'image_alt' => 'Library Image 1', 'title' => 'Library View', 'size_class' => 'large'],
-                ['image_url' => 'https://rkdcollegepatna.org/Facilities/lib_11.jpeg', 'image_alt' => 'Library Image 2', 'title' => 'Reading Area', 'size_class' => ''],
-                ['image_url' => 'https://rkdcollegepatna.org/Facilities/lib_12.jpeg', 'image_alt' => 'Library Image 3', 'title' => 'Book Section', 'size_class' => ''],
-                ['image_url' => 'https://rkdcollegepatna.org/Facilities/lib_13.jpeg', 'image_alt' => 'Library Image 4', 'title' => 'Library Facility', 'size_class' => ''],
-                ['image_url' => 'https://rkdcollegepatna.org/Facilities/lib_14.jpeg', 'image_alt' => 'Library Image 5', 'title' => 'Book Rack', 'size_class' => ''],
-                ['image_url' => 'https://rkdcollegepatna.org/Facilities/lib_15.jpeg', 'image_alt' => 'Library Image 6', 'title' => 'Study Space', 'size_class' => ''],
-                ['image_url' => 'https://rkdcollegepatna.org/Facilities/lib_16.jpeg', 'image_alt' => 'Library Image 7', 'title' => 'Library Room', 'size_class' => ''],
-                ['image_url' => 'https://rkdcollegepatna.org/Facilities/library_01.jpeg', 'image_alt' => 'Library Image 8', 'title' => 'Library Collection', 'size_class' => 'wide'],
-                ['image_url' => 'https://rkdcollegepatna.org/Facilities/library_02.jpeg', 'image_alt' => 'Library Image 9', 'title' => 'Resource Area', 'size_class' => ''],
-                ['image_url' => 'https://rkdcollegepatna.org/Facilities/library_03.jpeg', 'image_alt' => 'Library Image 10', 'title' => 'Library Interior', 'size_class' => ''],
-            ],
-        ],
-
-        'ict-training-center' => [
-            'prefix' => 'ict',
-
-            'hero_icon' => 'bi bi-router-fill',
-            'hero_kicker' => 'Learning Facility',
-            'hero_title' => 'ICT Training Center',
-            'hero_description' => 'ICT Training Center facility of Ram Krishna Dwarika College, Patna for digital learning, computer-based practice and technology-enabled academic preparation.',
-
-            'image' => 'https://rkdcollegepatna.org/Facilities/library_02.jpeg',
-            'image_badge' => 'Digital Training Facility',
-            'image_alt' => 'RKD College ICT Training Center',
-            'image_title' => 'ICT Learning Support',
-            'image_description' => 'The ICT Training Center supports technology-based learning, digital skill development and academic use of online resources.',
-
-            'panel_subtitle' => 'Facility Overview',
-            'panel_title' => 'Technology Enabled Training Space',
-            'lead_description' => 'The ICT Training Center is designed to support students with digital learning, computer-based practice, online academic resources, e-content, e-books, e-journals and technology-enabled academic preparation.',
-
-            'button_text' => 'Computer Room',
-            'button_url' => 'computer-room.html',
-            'button_external' => false,
-
-            'features' => [
-                ['icon' => 'bi bi-pc-display-horizontal', 'title' => 'Computer Training', 'description' => 'Supports computer-based academic learning and practical digital work.'],
-                ['icon' => 'bi bi-wifi', 'title' => 'Internet Facility', 'description' => 'Helps students access online resources, e-books and e-journals.'],
-                ['icon' => 'bi bi-file-earmark-text-fill', 'title' => 'E-Study Material', 'description' => 'Useful for digital notes, course material and online content access.'],
-                ['icon' => 'bi bi-person-video3', 'title' => 'ICT Sessions', 'description' => 'Can support training sessions, workshops and digital literacy activities.'],
-            ],
-
-            'gallery_label' => 'ICT Gallery',
-            'gallery_title' => 'Digital Learning Images',
-            'gallery_description' => 'Local ICT images can be replaced later with official optimized images from college. Library / digital resource images are also used as reference visuals.',
-
-            'gallery_items' => [
-                ['image_url' => 'https://rkdcollegepatna.org/Facilities/library_02.jpeg', 'image_alt' => 'Study Resource', 'title' => 'Study Material Support', 'size_class' => 'wide'],
-                ['image_url' => 'https://rkdcollegepatna.org/Facilities/library_03.jpeg', 'image_alt' => 'Academic Resource', 'title' => 'Digital Academic Resource', 'size_class' => ''],
-                ['image_url' => 'https://rkdcollegepatna.org/Facilities/lib_10.jpeg', 'image_alt' => 'Library Support Image', 'title' => 'E-Resource Support', 'size_class' => ''],
-            ],
-        ],
+    $prefixMap = [
+        'computer-room' => 'comp',
+        'e-library' => 'elib',
+        'library' => 'library',
+        'ict-training-center' => 'ict',
+        'physics-lab' => 'phy',
+        'psychology-lab' => 'psy',
+        'geography-lab' => 'geo',
+        'bsc-it-lab' => 'bsit',
+        'bca-lab' => 'bca',
+        'zoology-lab' => 'zoo',
+        'botany-lab' => 'botany',
+        'chemistry-lab' => 'chem',
     ];
 
-    $data = $fallbacks[$slug] ?? $fallbacks['computer-room'];
+    $prefix = optional($facility)->css_prefix ?: ($prefixMap[$slug] ?? 'phy');
 
-    $prefix = optional($facility)->css_prefix ?: $data['prefix'];
+    $heroTitle = optional($facility)->hero_title ?: ucwords(str_replace('-', ' ', $slug));
+    $heroKicker = optional($facility)->hero_kicker ?: 'Learning Facility';
+    $heroIcon = optional($facility)->hero_icon ?: 'bi bi-flask';
+    $heroDescription = optional($facility)->hero_description ?: 'Learning facility information of Ram Krishna Dwarika College, Patna.';
 
-    $heroIcon = optional($facility)->hero_icon ?: $data['hero_icon'];
-    $heroKicker = optional($facility)->hero_kicker ?: $data['hero_kicker'];
-    $heroTitle = optional($facility)->hero_title ?: $data['hero_title'];
-    $heroDescription = optional($facility)->hero_description ?: $data['hero_description'];
+    $mainImage = optional($facility)->main_image_url ?: data_get(optional($facility)->gallery_items, '0.image_url');
+    $mainImage = $mainImage ?: asset('assets/img/no-image.jpg');
 
-    $mainImage = optional($facility)->main_image_url ?: $data['image'];
-    $mainImage = str_starts_with($mainImage, 'http') ? $mainImage : asset($mainImage);
+    if (!str_starts_with($mainImage, 'http') && !str_starts_with($mainImage, '/')) {
+        $mainImage = asset($mainImage);
+    }
 
-    $imageBadge = optional($facility)->image_badge ?: $data['image_badge'];
-    $imageAlt = optional($facility)->image_alt ?: $data['image_alt'];
-    $imageTitle = optional($facility)->image_title ?: $data['image_title'];
-    $imageDescription = optional($facility)->image_description ?: $data['image_description'];
+    $imageBadge = optional($facility)->image_badge ?: 'Official Facility';
+    $imageAlt = optional($facility)->image_alt ?: $heroTitle;
+    $imageTitle = optional($facility)->image_title ?: $heroTitle;
+    $imageDescription = optional($facility)->image_description ?: 'Facility details will be updated soon.';
 
-    $panelSubtitle = optional($facility)->panel_subtitle ?: $data['panel_subtitle'];
-    $panelTitle = optional($facility)->panel_title ?: $data['panel_title'];
-    $leadDescription = optional($facility)->lead_description ?: $data['lead_description'];
+    $panelSubtitle = optional($facility)->panel_subtitle ?: 'Facility Overview';
+    $panelTitle = optional($facility)->panel_title ?: $heroTitle . ' Overview';
+    $leadDescription = optional($facility)->lead_description ?: 'Detailed information will be updated soon.';
 
-    $buttonText = optional($facility)->button_text ?: $data['button_text'];
-    $buttonUrl = optional($facility)->button_url ?: $data['button_url'];
-    $buttonExternal = optional($facility)->button_external ?? $data['button_external'];
+    $buttonText = optional($facility)->button_text ?: 'Departments';
+    $buttonUrl = optional($facility)->button_url ?: 'departments.html';
+    $buttonExternal = optional($facility)->button_external ?? false;
 
-    $features = optional($facility)->features ?: $data['features'];
+    $features = optional($facility)->features ?: [];
+    $galleryItems = optional($facility)->gallery_items ?: [];
 
-    $galleryLabel = optional($facility)->gallery_label ?: $data['gallery_label'];
-    $galleryTitle = optional($facility)->gallery_title ?: $data['gallery_title'];
-    $galleryDescription = optional($facility)->gallery_description ?: $data['gallery_description'];
-    $galleryItems = optional($facility)->gallery_items ?: $data['gallery_items'];
+    $galleryLabel = optional($facility)->gallery_label ?: $heroTitle . ' Gallery';
+    $galleryTitle = optional($facility)->gallery_title ?: 'Official Images';
+    $galleryDescription = optional($facility)->gallery_description ?: 'Images and related links will be updated soon.';
+
+    $detailItems = optional($facility)->detail_items ?: [];
+    $detailLabel = optional($facility)->detail_label ?: 'Facility Uses';
+    $detailTitle = optional($facility)->detail_title ?: $heroTitle . ' Uses';
+    $detailButtonText = optional($facility)->detail_button_text;
+    $detailButtonUrl = optional($facility)->detail_button_url;
 
     $buttonHref = str_starts_with($buttonUrl, 'http') ? $buttonUrl : url($buttonUrl);
 @endphp
 
 
-{{-- LEARNING HERO START --}}
+{{-- HERO START --}}
 <section class="{{ $prefix }}-hero-section">
     <div class="{{ $prefix }}-hero-shape {{ $prefix }}-hero-shape-1"></div>
     <div class="{{ $prefix }}-hero-shape {{ $prefix }}-hero-shape-2"></div>
@@ -250,10 +92,10 @@
         </div>
     </div>
 </section>
-{{-- LEARNING HERO END --}}
+{{-- HERO END --}}
 
 
-{{-- LEARNING MAIN START --}}
+{{-- MAIN START --}}
 <section class="{{ $prefix }}-main-section">
     <div class="{{ $prefix }}-bg-shape {{ $prefix }}-bg-shape-1"></div>
     <div class="{{ $prefix }}-bg-shape {{ $prefix }}-bg-shape-2"></div>
@@ -313,17 +155,21 @@
                         {{ $leadDescription }}
                     </p>
 
-                    <div class="{{ $prefix }}-feature-grid">
-                        @foreach($features as $feature)
-                            <div class="{{ $prefix }}-feature-card">
-                                <i class="{{ data_get($feature, 'icon', 'bi bi-patch-check-fill') }}"></i>
+                    @if(count($features))
+                        <div class="{{ $prefix }}-feature-grid">
 
-                                <h4>{{ data_get($feature, 'title') }}</h4>
+                            @foreach($features as $feature)
+                                <div class="{{ $prefix }}-feature-card">
+                                    <i class="{{ data_get($feature, 'icon', 'bi bi-patch-check-fill') }}"></i>
 
-                                <p>{{ data_get($feature, 'description') }}</p>
-                            </div>
-                        @endforeach
-                    </div>
+                                    <h4>{{ data_get($feature, 'title') }}</h4>
+
+                                    <p>{{ data_get($feature, 'description') }}</p>
+                                </div>
+                            @endforeach
+
+                        </div>
+                    @endif
 
                 </div>
             </div>
@@ -332,10 +178,10 @@
 
     </div>
 </section>
-{{-- LEARNING MAIN END --}}
+{{-- MAIN END --}}
 
 
-{{-- LEARNING GALLERY START --}}
+{{-- GALLERY START --}}
 @if(count($galleryItems))
     <section class="{{ $prefix }}-gallery-section">
         <div class="container">
@@ -355,22 +201,41 @@
 
                 @foreach($galleryItems as $item)
                     @php
-                        $galleryImage = data_get($item, 'image_url');
-
-                        if ($galleryImage && !str_starts_with($galleryImage, 'http')) {
-                            $galleryImage = asset($galleryImage);
-                        }
-
+                        $type = data_get($item, 'type', 'image');
                         $sizeClass = data_get($item, 'size_class');
                     @endphp
 
-                    @if($galleryImage)
-                        <a href="{{ $galleryImage }}"
-                           target="_blank"
-                           class="{{ $prefix }}-gallery-card {{ $sizeClass }}">
-                            <img src="{{ $galleryImage }}" alt="{{ data_get($item, 'image_alt') }}">
-                            <span>{{ data_get($item, 'title') }}</span>
+                    @if($type === 'link')
+                        @php
+                            $linkUrl = data_get($item, 'link_url', '#');
+                            $linkHref = str_starts_with($linkUrl, 'http') ? $linkUrl : url($linkUrl);
+                        @endphp
+
+                        <a href="{{ $linkHref }}"
+                           class="{{ $prefix }}-gallery-card {{ $prefix }}-link-visual {{ $sizeClass }}">
+                            <div>
+                                <i class="{{ data_get($item, 'icon', 'bi bi-link-45deg') }}"></i>
+                                <strong>{{ data_get($item, 'title') }}</strong>
+                                <small>{{ data_get($item, 'subtitle') }}</small>
+                            </div>
                         </a>
+                    @else
+                        @php
+                            $galleryImage = data_get($item, 'image_url');
+
+                            if ($galleryImage && !str_starts_with($galleryImage, 'http') && !str_starts_with($galleryImage, '/')) {
+                                $galleryImage = asset($galleryImage);
+                            }
+                        @endphp
+
+                        @if($galleryImage)
+                            <a href="{{ $galleryImage }}"
+                               target="_blank"
+                               class="{{ $prefix }}-gallery-card {{ $sizeClass }}">
+                                <img src="{{ $galleryImage }}" alt="{{ data_get($item, 'image_alt') }}">
+                                <span>{{ data_get($item, 'title') }}</span>
+                            </a>
+                        @endif
                     @endif
                 @endforeach
 
@@ -379,6 +244,55 @@
         </div>
     </section>
 @endif
-{{-- LEARNING GALLERY END --}}
+{{-- GALLERY END --}}
+
+
+{{-- DETAIL START --}}
+@if(count($detailItems))
+    <section class="{{ $prefix }}-detail-section">
+        <div class="container">
+
+            <div class="{{ $prefix }}-detail-card">
+
+                <div class="{{ $prefix }}-detail-head">
+                    <div>
+                        <span class="{{ $prefix }}-subtitle">
+                            <i class="bi bi-list-check"></i>
+                            {{ $detailLabel }}
+                        </span>
+
+                        <h2>{{ $detailTitle }}</h2>
+                    </div>
+
+                    @if($detailButtonText && $detailButtonUrl)
+                        @php
+                            $detailHref = str_starts_with($detailButtonUrl, 'http') ? $detailButtonUrl : url($detailButtonUrl);
+                        @endphp
+
+                        <a href="{{ $detailHref }}" class="btn btn-outline-main">
+                            {{ $detailButtonText }}
+                            <i class="bi bi-arrow-right"></i>
+                        </a>
+                    @endif
+                </div>
+
+                <div class="{{ $prefix }}-use-grid">
+
+                    @foreach($detailItems as $index => $item)
+                        <div class="{{ $prefix }}-use-card">
+                            <span>{{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}</span>
+                            <h4>{{ data_get($item, 'title') }}</h4>
+                            <p>{{ data_get($item, 'description') }}</p>
+                        </div>
+                    @endforeach
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+@endif
+{{-- DETAIL END --}}
 
 @endsection

@@ -21,7 +21,10 @@
 
         <div class="user-meta">
             <p class="user-name">{{ auth()->user()->name }}</p>
-            <p class="user-role">Administrator</p>
+
+            <p class="user-role">
+                {{ auth()->user()->roles->pluck('title')->first() ?? 'Administrator' }}
+            </p>
         </div>
     </div>
 
@@ -30,13 +33,14 @@
 
         <p class="sidebar-section-title nav-label">Main</p>
 
-        {{-- Dashboard --}}
+        {{-- DASHBOARD --}}
         <a href="{{ route('admin.home') }}"
            data-tooltip="Dashboard"
            class="nav-link {{ request()->routeIs('admin.home') ? 'active' : '' }}">
             <i class="fas fa-chart-pie nav-icon"></i>
             <span class="nav-label">{{ trans('global.dashboard') }}</span>
         </a>
+
 
         {{-- USER MANAGEMENT GROUP --}}
         @can('user_management_access')
@@ -106,218 +110,242 @@
 
                 </div>
             </div>
+
+            <div class="nav-divider"></div>
         @endcan
 
-        <div class="nav-divider"></div>
 
-       {{-- WEBSITE CONTENT GROUP --}}
-@php
-    $contentActive = request()->is('admin/college-about-page*')
-        || request()->is('admin/college-principal-message*')
-        || request()->is('admin/college-ex-principals*')
-        || request()->is('admin/college-vision-mission-page*');
-@endphp
+        {{-- WEBSITE CONTENT GROUP --}}
+        @php
+            $contentActive = request()->is('admin/college-about-page*')
+                || request()->is('admin/college-principal-message*')
+                || request()->is('admin/college-ex-principals*')
+                || request()->is('admin/college-vision-mission-page*');
 
-<div x-data="{ open: {{ $contentActive ? 'true' : 'false' }} }">
+            $canContentMenu =
+                Gate::allows('college_about_page_access') ||
+                Gate::allows('college_principal_message_access') ||
+                Gate::allows('college_ex_principal_access') ||
+                Gate::allows('college_vision_mission_page_access');
+        @endphp
 
-    <button type="button"
-            @click="open = !open"
-            data-tooltip="Website Content"
-            class="nav-link nav-group-btn {{ $contentActive ? 'active' : '' }}">
+        @if($canContentMenu)
+            <div x-data="{ open: {{ $contentActive ? 'true' : 'false' }} }">
 
-        <div class="nav-group-left">
-            <i class="fas fa-globe nav-icon"></i>
-            <span class="nav-label">Website Content</span>
-        </div>
+                <button type="button"
+                        @click="open = !open"
+                        data-tooltip="Website Content"
+                        class="nav-link nav-group-btn {{ $contentActive ? 'active' : '' }}">
 
-        <i class="fas fa-chevron-right chevron"
-           :style="open ? 'transform:rotate(90deg)' : ''"></i>
-    </button>
+                    <div class="nav-group-left">
+                        <i class="fas fa-globe nav-icon"></i>
+                        <span class="nav-label">Website Content</span>
+                    </div>
 
-    <div class="submenu"
-         x-show="open"
-         x-transition:enter="transition ease-out duration-150"
-         x-transition:enter-start="opacity-0 -translate-y-1"
-         x-transition:enter-end="opacity-100 translate-y-0"
-         x-transition:leave="transition ease-in duration-100"
-         x-transition:leave-start="opacity-100 translate-y-0"
-         x-transition:leave-end="opacity-0 -translate-y-1">
+                    <i class="fas fa-chevron-right chevron"
+                       :style="open ? 'transform:rotate(90deg)' : ''"></i>
+                </button>
 
-        @can('college_about_page_access')
-            <a href="{{ route('admin.college-about-page.edit') }}"
-               class="sub-link {{ request()->is('admin/college-about-page*') ? 'active' : '' }}">
-                <i class="fas fa-university"></i>
-                College About Page
-            </a>
-        @endcan
+                <div class="submenu"
+                     x-show="open"
+                     x-transition:enter="transition ease-out duration-150"
+                     x-transition:enter-start="opacity-0 -translate-y-1"
+                     x-transition:enter-end="opacity-100 translate-y-0"
+                     x-transition:leave="transition ease-in duration-100"
+                     x-transition:leave-start="opacity-100 translate-y-0"
+                     x-transition:leave-end="opacity-0 -translate-y-1">
 
-        @can('college_principal_message_access')
-            <a href="{{ route('admin.college-principal-message.edit') }}"
-               class="sub-link {{ request()->is('admin/college-principal-message*') ? 'active' : '' }}">
-                <i class="fas fa-user-tie"></i>
-                Principal Message
-            </a>
-        @endcan
-        @can('college_ex_principal_access')
-    <a href="{{ route('admin.college-ex-principals.index') }}"
-       class="sub-link {{ request()->is('admin/college-ex-principals*') ? 'active' : '' }}">
-        <i class="fas fa-list-ol"></i>
-        Ex Principals
-    </a>
-@endcan
-@can('college_vision_mission_page_access')
-    <a href="{{ route('admin.college-vision-mission-page.edit') }}"
-       class="sub-link {{ request()->is('admin/college-vision-mission-page*') ? 'active' : '' }}">
-        <i class="fas fa-bullseye"></i>
-        Vision & Mission
-    </a>
-@endcan
-    </div>
-</div>
+                    @can('college_about_page_access')
+                        <a href="{{ route('admin.college-about-page.edit') }}"
+                           class="sub-link {{ request()->is('admin/college-about-page*') ? 'active' : '' }}">
+                            <i class="fas fa-university"></i>
+                            College About Page
+                        </a>
+                    @endcan
 
-<div class="nav-divider"></div>
+                    @can('college_principal_message_access')
+                        <a href="{{ route('admin.college-principal-message.edit') }}"
+                           class="sub-link {{ request()->is('admin/college-principal-message*') ? 'active' : '' }}">
+                            <i class="fas fa-user-tie"></i>
+                            Principal Message
+                        </a>
+                    @endcan
 
+                    @can('college_ex_principal_access')
+                        <a href="{{ route('admin.college-ex-principals.index') }}"
+                           class="sub-link {{ request()->is('admin/college-ex-principals*') ? 'active' : '' }}">
+                            <i class="fas fa-list-ol"></i>
+                            Ex Principals
+                        </a>
+                    @endcan
 
-{{-- ACADEMIC MANAGEMENT GROUP --}}
-@php
-    $academicActive = request()->is('admin/academic-course-pages*')
-        || request()->is('admin/academic-courses*')
-        || request()->is('admin/academic-help-cards*')
-        || request()->is('admin/department-streams*')
-        || request()->is('admin/departments*')
-        || request()->is('admin/staff-members*')
-        || request()->is('admin/download-categories*')
-        || request()->is('admin/download-items*')
-        || request()->is('admin/academic-info-pages*')
-        || request()->is('admin/campus-facilities*')
-        || request()->is('admin/learning-facilities*');
-@endphp
+                    @can('college_vision_mission_page_access')
+                        <a href="{{ route('admin.college-vision-mission-page.edit') }}"
+                           class="sub-link {{ request()->is('admin/college-vision-mission-page*') ? 'active' : '' }}">
+                            <i class="fas fa-bullseye"></i>
+                            Vision & Mission
+                        </a>
+                    @endcan
 
-@can('academic_course_page_access')
-    <div x-data="{ open: {{ $academicActive ? 'true' : 'false' }} }">
-
-        <button type="button"
-                @click="open = !open"
-                data-tooltip="Academics"
-                class="nav-link nav-group-btn {{ $academicActive ? 'active' : '' }}">
-
-            <div class="nav-group-left">
-                <i class="fas fa-graduation-cap nav-icon"></i>
-                <span class="nav-label">Academics</span>
+                </div>
             </div>
 
-            <i class="fas fa-chevron-right chevron"
-               :style="open ? 'transform:rotate(90deg)' : ''"></i>
-        </button>
+            <div class="nav-divider"></div>
+        @endif
 
-        <div class="submenu"
-             x-show="open"
-             x-transition:enter="transition ease-out duration-150"
-             x-transition:enter-start="opacity-0 -translate-y-1"
-             x-transition:enter-end="opacity-100 translate-y-0"
-             x-transition:leave="transition ease-in duration-100"
-             x-transition:leave-start="opacity-100 translate-y-0"
-             x-transition:leave-end="opacity-0 -translate-y-1">
 
-            @can('academic_course_page_access')
-                <a href="{{ route('admin.academic-course-pages.index') }}"
-                   class="sub-link {{ request()->is('admin/academic-course-pages*') ? 'active' : '' }}">
-                    <i class="fas fa-book-open"></i>
-                    Course Pages
-                </a>
-            @endcan
+        {{-- ACADEMIC MANAGEMENT GROUP --}}
+        @php
+            $academicActive = request()->is('admin/academic-course-pages*')
+                || request()->is('admin/academic-courses*')
+                || request()->is('admin/academic-help-cards*')
+                || request()->is('admin/department-streams*')
+                || request()->is('admin/departments*')
+                || request()->is('admin/staff-members*')
+                || request()->is('admin/download-categories*')
+                || request()->is('admin/download-items*')
+                || request()->is('admin/academic-info-pages*')
+                || request()->is('admin/campus-facilities*')
+                || request()->is('admin/learning-facilities*');
 
-            @can('academic_course_access')
-                <a href="{{ route('admin.academic-courses.index') }}"
-                   class="sub-link {{ request()->is('admin/academic-courses*') ? 'active' : '' }}">
-                    <i class="fas fa-list-check"></i>
-                    Courses
-                </a>
-            @endcan
+            $canAcademicMenu =
+                Gate::allows('academic_course_page_access') ||
+                Gate::allows('academic_course_access') ||
+                Gate::allows('academic_help_card_access') ||
+                Gate::allows('department_stream_access') ||
+                Gate::allows('department_access') ||
+                Gate::allows('staff_member_access') ||
+                Gate::allows('download_category_access') ||
+                Gate::allows('download_item_access') ||
+                Gate::allows('academic_info_page_access') ||
+                Gate::allows('campus_facility_access') ||
+                Gate::allows('learning_facility_access');
+        @endphp
 
-            @can('academic_help_card_access')
-                <a href="{{ route('admin.academic-help-cards.index') }}"
-                   class="sub-link {{ request()->is('admin/academic-help-cards*') ? 'active' : '' }}">
-                    <i class="fas fa-info-circle"></i>
-                    Help Cards
-                </a>
-            @endcan
+        @if($canAcademicMenu)
+            <div x-data="{ open: {{ $academicActive ? 'true' : 'false' }} }">
 
-            @can('department_stream_access')
-                <a href="{{ route('admin.department-streams.index') }}"
-                   class="sub-link {{ request()->is('admin/department-streams*') ? 'active' : '' }}">
-                    <i class="fas fa-layer-group"></i>
-                    Department Streams
-                </a>
-            @endcan
+                <button type="button"
+                        @click="open = !open"
+                        data-tooltip="Academics"
+                        class="nav-link nav-group-btn {{ $academicActive ? 'active' : '' }}">
 
-            @can('department_access')
-                <a href="{{ route('admin.departments.index') }}"
-                   class="sub-link {{ request()->is('admin/departments*') ? 'active' : '' }}">
-                    <i class="fas fa-columns"></i>
-                    Departments
-                </a>
-            @endcan
+                    <div class="nav-group-left">
+                        <i class="fas fa-graduation-cap nav-icon"></i>
+                        <span class="nav-label">Academics</span>
+                    </div>
 
-            @can('staff_member_access')
-                <a href="{{ route('admin.staff-members.index') }}"
-                   class="sub-link {{ request()->is('admin/staff-members*') ? 'active' : '' }}">
-                    <i class="fas fa-user-tie"></i>
-                    Staff / Faculty
-                </a>
-            @endcan
+                    <i class="fas fa-chevron-right chevron"
+                       :style="open ? 'transform:rotate(90deg)' : ''"></i>
+                </button>
 
-            @can('download_category_access')
-                <a href="{{ route('admin.download-categories.index') }}"
-                   class="sub-link {{ request()->is('admin/download-categories*') ? 'active' : '' }}">
-                    <i class="fas fa-folder-open"></i>
-                    Download Categories
-                </a>
-            @endcan
+                <div class="submenu"
+                     x-show="open"
+                     x-transition:enter="transition ease-out duration-150"
+                     x-transition:enter-start="opacity-0 -translate-y-1"
+                     x-transition:enter-end="opacity-100 translate-y-0"
+                     x-transition:leave="transition ease-in duration-100"
+                     x-transition:leave-start="opacity-100 translate-y-0"
+                     x-transition:leave-end="opacity-0 -translate-y-1">
 
-            @can('download_item_access')
-                <a href="{{ route('admin.download-items.index') }}"
-                   class="sub-link {{ request()->is('admin/download-items*') ? 'active' : '' }}">
-                    <i class="fas fa-download"></i>
-                    Downloads
-                </a>
-            @endcan
+                    @can('academic_course_page_access')
+                        <a href="{{ route('admin.academic-course-pages.index') }}"
+                           class="sub-link {{ request()->is('admin/academic-course-pages*') ? 'active' : '' }}">
+                            <i class="fas fa-book-open"></i>
+                            Course Pages
+                        </a>
+                    @endcan
 
-            @can('academic_info_page_access')
-                <a href="{{ route('admin.academic-info-pages.index') }}"
-                   class="sub-link {{ request()->is('admin/academic-info-pages*') ? 'active' : '' }}">
-                    <i class="fas fa-file-alt"></i>
-                    Info Pages
-                </a>
-            @endcan
+                    @can('academic_course_access')
+                        <a href="{{ route('admin.academic-courses.index') }}"
+                           class="sub-link {{ request()->is('admin/academic-courses*') ? 'active' : '' }}">
+                            <i class="fas fa-list-check"></i>
+                            Courses
+                        </a>
+                    @endcan
 
-            @can('campus_facility_access')
-    <a href="{{ route('admin.campus-facilities.index') }}"
-       class="sub-link {{ request()->is('admin/campus-facilities*') ? 'active' : '' }}">
-        <i class="fas fa-building"></i>
-        Campus Facilities
-    </a>
-@endcan
+                    @can('academic_help_card_access')
+                        <a href="{{ route('admin.academic-help-cards.index') }}"
+                           class="sub-link {{ request()->is('admin/academic-help-cards*') ? 'active' : '' }}">
+                            <i class="fas fa-info-circle"></i>
+                            Help Cards
+                        </a>
+                    @endcan
 
-@can('learning_facility_access')
-    <a href="{{ route('admin.learning-facilities.index') }}"
-       class="sub-link {{ request()->is('admin/learning-facilities*') ? 'active' : '' }}">
-        <i class="fas fa-laptop-code"></i>
-        Learning Facilities
-    </a>
-@endcan
+                    @can('department_stream_access')
+                        <a href="{{ route('admin.department-streams.index') }}"
+                           class="sub-link {{ request()->is('admin/department-streams*') ? 'active' : '' }}">
+                            <i class="fas fa-layer-group"></i>
+                            Department Streams
+                        </a>
+                    @endcan
 
-        </div>
-    </div>
+                    @can('department_access')
+                        <a href="{{ route('admin.departments.index') }}"
+                           class="sub-link {{ request()->is('admin/departments*') ? 'active' : '' }}">
+                            <i class="fas fa-columns"></i>
+                            Departments
+                        </a>
+                    @endcan
 
-    <div class="nav-divider"></div>
-@endcan
+                    @can('staff_member_access')
+                        <a href="{{ route('admin.staff-members.index') }}"
+                           class="sub-link {{ request()->is('admin/staff-members*') ? 'active' : '' }}">
+                            <i class="fas fa-user-tie"></i>
+                            Staff / Faculty
+                        </a>
+                    @endcan
 
+                    @can('download_category_access')
+                        <a href="{{ route('admin.download-categories.index') }}"
+                           class="sub-link {{ request()->is('admin/download-categories*') ? 'active' : '' }}">
+                            <i class="fas fa-folder-open"></i>
+                            Download Categories
+                        </a>
+                    @endcan
+
+                    @can('download_item_access')
+                        <a href="{{ route('admin.download-items.index') }}"
+                           class="sub-link {{ request()->is('admin/download-items*') ? 'active' : '' }}">
+                            <i class="fas fa-download"></i>
+                            Downloads
+                        </a>
+                    @endcan
+
+                    @can('academic_info_page_access')
+                        <a href="{{ route('admin.academic-info-pages.index') }}"
+                           class="sub-link {{ request()->is('admin/academic-info-pages*') ? 'active' : '' }}">
+                            <i class="fas fa-file-alt"></i>
+                            Info Pages
+                        </a>
+                    @endcan
+
+                    @can('campus_facility_access')
+                        <a href="{{ route('admin.campus-facilities.index') }}"
+                           class="sub-link {{ request()->is('admin/campus-facilities*') ? 'active' : '' }}">
+                            <i class="fas fa-building"></i>
+                            Campus Facilities
+                        </a>
+                    @endcan
+
+                    @can('learning_facility_access')
+                        <a href="{{ route('admin.learning-facilities.index') }}"
+                           class="sub-link {{ request()->is('admin/learning-facilities*') ? 'active' : '' }}">
+                            <i class="fas fa-laptop-code"></i>
+                            Learning Facilities
+                        </a>
+                    @endcan
+
+                </div>
+            </div>
+
+            <div class="nav-divider"></div>
+        @endif
 
 
         <p class="sidebar-section-title compact nav-label">Account</p>
 
-        {{-- Change Password --}}
+        {{-- CHANGE PASSWORD --}}
         @if(file_exists(app_path('Http/Controllers/Auth/ChangePasswordController.php')))
             @can('profile_password_edit')
                 <a href="{{ route('profile.password.edit') }}"
@@ -329,7 +357,7 @@
             @endcan
         @endif
 
-        {{-- Settings --}}
+        {{-- SETTINGS --}}
         <a href="#"
            data-tooltip="Settings"
            class="nav-link">

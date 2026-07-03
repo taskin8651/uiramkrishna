@@ -27,6 +27,46 @@ class LearningFacilityController extends Controller
         return $this->page('ict-training-center');
     }
 
+    public function physicsLab()
+    {
+        return $this->page('physics-lab');
+    }
+
+    public function psychologyLab()
+    {
+        return $this->page('psychology-lab');
+    }
+
+    public function geographyLab()
+    {
+        return $this->page('geography-lab');
+    }
+
+    public function bscItLab()
+    {
+        return $this->page('bsc-it-lab');
+    }
+
+    public function bcaLab()
+    {
+        return $this->page('bca-lab');
+    }
+
+    public function zoologyLab()
+    {
+        return $this->page('zoology-lab');
+    }
+
+    public function botanyLab()
+    {
+        return $this->page('botany-lab');
+    }
+
+    public function chemistryLab()
+    {
+        return $this->page('chemistry-lab');
+    }
+
     private function page($slug)
     {
         $facility = LearningFacility::active()

@@ -39,12 +39,19 @@ class LearningFacility extends Model implements HasMedia
         'gallery_description',
         'gallery_items',
 
+        'detail_label',
+        'detail_title',
+        'detail_button_text',
+        'detail_button_url',
+        'detail_items',
+
         'status',
     ];
 
     protected $casts = [
         'features'        => 'array',
         'gallery_items'   => 'array',
+        'detail_items'    => 'array',
         'button_external' => 'boolean',
         'status'          => 'boolean',
     ];
