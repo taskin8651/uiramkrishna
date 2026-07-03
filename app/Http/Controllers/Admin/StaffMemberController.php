@@ -50,9 +50,11 @@ class StaffMemberController extends Controller
 
         $data = $request->validate([
             'department_id' => 'nullable|exists:departments,id',
+            'staff_type'    => 'required|in:teaching,non_teaching',
             'sort_order'   => 'nullable|integer|min:0',
             'name'         => 'required|string|max:255',
             'designation'  => 'nullable|string|max:255',
+            'designation_type' => 'nullable|in:principal,professor,associate,assistant,guest,staff',
             'qualification'=> 'nullable|string|max:255',
             'email'        => 'nullable|email|max:255',
             'phone'        => 'nullable|string|max:50',
@@ -111,9 +113,11 @@ class StaffMemberController extends Controller
 
         $data = $request->validate([
             'department_id' => 'nullable|exists:departments,id',
+            'staff_type'    => 'required|in:teaching,non_teaching',
             'sort_order'   => 'nullable|integer|min:0',
             'name'         => 'required|string|max:255',
             'designation'  => 'nullable|string|max:255',
+            'designation_type' => 'nullable|in:principal,professor,associate,assistant,guest,staff',
             'qualification'=> 'nullable|string|max:255',
             'email'        => 'nullable|email|max:255',
             'phone'        => 'nullable|string|max:50',

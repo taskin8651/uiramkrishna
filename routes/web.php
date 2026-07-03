@@ -72,6 +72,10 @@ Route::resource('download-categories', 'DownloadCategoryController');
 // Download Items
 Route::delete('download-items/destroy', 'DownloadItemController@massDestroy')->name('download-items.massDestroy');
 Route::resource('download-items', 'DownloadItemController');
+
+// Academic Info Pages
+Route::delete('academic-info-pages/destroy', 'AcademicInfoPageController@massDestroy')->name('academic-info-pages.massDestroy');
+Route::resource('academic-info-pages', 'AcademicInfoPageController', ['except' => ['show']]);
     });
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {
     // Change password

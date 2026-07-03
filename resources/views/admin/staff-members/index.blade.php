@@ -57,6 +57,7 @@
                     <th style="width:40px;"></th>
                     <th>ID</th>
                     <th>Staff</th>
+                    <th>Type</th>
                     <th>Department</th>
                     <th>Designation</th>
                     <th>Contact</th>
@@ -97,6 +98,12 @@
                                     <p class="table-sub-text">{{ $staffMember->qualification ?: 'Staff / Faculty' }}</p>
                                 </div>
                             </div>
+                        </td>
+
+                        <td>
+                            <span class="role-tag">
+                                {{ $staffMember->staff_type === 'non_teaching' ? 'Non-Teaching' : 'Teaching' }}
+                            </span>
                         </td>
 
                         <td>

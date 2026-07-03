@@ -41,8 +41,29 @@ class DownloadItemController extends Controller
             'download_category_id' => 'nullable|exists:download_categories,id',
             'sort_order'          => 'nullable|integer|min:0',
             'title'               => 'required|string|max:255',
+            'slug'                => 'nullable|string|max:255',
             'description'         => 'nullable|string',
+            'kicker_text'         => 'nullable|string|max:255',
+            'hero_title'          => 'nullable|string|max:255',
+            'hero_description'    => 'nullable|string',
             'year'                => 'nullable|string|max:50',
+            'document_code'       => 'nullable|string|max:255',
+            'authority'           => 'nullable|string|max:255',
+            'document_date'       => 'nullable|string|max:255',
+            'session_reference'   => 'nullable|string|max:255',
+            'class_start'         => 'nullable|string|max:255',
+            'summary_items'       => 'nullable|array',
+            'summary_items.*.label' => 'nullable|string|max:255',
+            'summary_items.*.value' => 'nullable|string|max:255',
+            'info_cards'          => 'nullable|array',
+            'info_cards.*.icon'   => 'nullable|string|max:255',
+            'info_cards.*.title'  => 'nullable|string|max:255',
+            'info_cards.*.description' => 'nullable|string',
+            'table_rows'          => 'nullable|array',
+            'table_rows.*.title'  => 'nullable|string|max:255',
+            'table_rows.*.details' => 'nullable|string',
+            'table_rows.*.button' => 'nullable|string|max:255',
+            'external_url'        => 'nullable|url|max:2048',
             'is_featured'         => 'nullable|boolean',
             'download_file'       => 'nullable|file|mimes:pdf,doc,docx,xls,xlsx,ppt,pptx,jpg,jpeg,png,webp,zip|max:10240',
             'status'              => 'nullable|boolean',
@@ -50,6 +71,7 @@ class DownloadItemController extends Controller
 
         $data['is_featured'] = $request->has('is_featured');
         $data['status'] = $request->has('status');
+        $data = $this->cleanRepeaterData($data);
 
         $downloadItem = DownloadItem::create(collect($data)->except('download_file')->toArray());
 
@@ -90,8 +112,29 @@ class DownloadItemController extends Controller
             'download_category_id' => 'nullable|exists:download_categories,id',
             'sort_order'          => 'nullable|integer|min:0',
             'title'               => 'required|string|max:255',
+            'slug'                => 'nullable|string|max:255',
             'description'         => 'nullable|string',
+            'kicker_text'         => 'nullable|string|max:255',
+            'hero_title'          => 'nullable|string|max:255',
+            'hero_description'    => 'nullable|string',
             'year'                => 'nullable|string|max:50',
+            'document_code'       => 'nullable|string|max:255',
+            'authority'           => 'nullable|string|max:255',
+            'document_date'       => 'nullable|string|max:255',
+            'session_reference'   => 'nullable|string|max:255',
+            'class_start'         => 'nullable|string|max:255',
+            'summary_items'       => 'nullable|array',
+            'summary_items.*.label' => 'nullable|string|max:255',
+            'summary_items.*.value' => 'nullable|string|max:255',
+            'info_cards'          => 'nullable|array',
+            'info_cards.*.icon'   => 'nullable|string|max:255',
+            'info_cards.*.title'  => 'nullable|string|max:255',
+            'info_cards.*.description' => 'nullable|string',
+            'table_rows'          => 'nullable|array',
+            'table_rows.*.title'  => 'nullable|string|max:255',
+            'table_rows.*.details' => 'nullable|string',
+            'table_rows.*.button' => 'nullable|string|max:255',
+            'external_url'        => 'nullable|url|max:2048',
             'is_featured'         => 'nullable|boolean',
             'download_file'       => 'nullable|file|mimes:pdf,doc,docx,xls,xlsx,ppt,pptx,jpg,jpeg,png,webp,zip|max:10240',
             'status'              => 'nullable|boolean',
@@ -99,6 +142,7 @@ class DownloadItemController extends Controller
 
         $data['is_featured'] = $request->has('is_featured');
         $data['status'] = $request->has('status');
+        $data = $this->cleanRepeaterData($data);
 
         $downloadItem->update(collect($data)->except('download_file')->toArray());
 
@@ -131,5 +175,19 @@ class DownloadItemController extends Controller
         DownloadItem::whereIn('id', request('ids', []))->delete();
 
         return response(null, Response::HTTP_NO_CONTENT);
+    }
+
+    private function cleanRepeaterData(array $data): array
+    {
+        foreach (['summary_items', 'info_cards', 'table_rows'] as $field) {
+            $data[$field] = collect($data[$field] ?? [])
+                ->filter(function ($row) {
+                    return collect($row)->filter(fn ($value) => filled($value))->isNotEmpty();
+                })
+                ->values()
+                ->all();
+        }
+
+        return $data;
     }
 }

@@ -3,7 +3,8 @@
 @section('content')
 
 @php
-    $title = $page->hero_title ?? 'Academic Information';
+    $page = $page ?? null;
+    $title = data_get($page, 'hero_title') ?? 'Academic Information';
 
     $cards = ($page && !empty($page->cards)) ? $page->cards : [
         [
@@ -25,13 +26,13 @@
 
             <span class="dept-kicker">
                 <i class="bi bi-journal-check"></i>
-                {{ $page->kicker_text ?? 'Academics' }}
+                {{ data_get($page, 'kicker_text') ?? 'Academics' }}
             </span>
 
             <h1>{{ $title }}</h1>
 
             <p>
-                {{ $page->hero_description ?? 'Academic information page of Ram Krishna Dwarika College, Patna.' }}
+                {{ data_get($page, 'hero_description') ?? 'Academic information page of Ram Krishna Dwarika College, Patna.' }}
             </p>
 
             <nav class="dept-breadcrumb" aria-label="breadcrumb">
@@ -53,13 +54,13 @@
         <div class="section-title text-center">
             <span>
                 <i class="bi bi-list-check"></i>
-                {{ $page->section_label ?? 'Information' }}
+                {{ data_get($page, 'section_label') ?? 'Information' }}
             </span>
 
-            <h2>{{ $page->section_title ?? $title }}</h2>
+            <h2>{{ data_get($page, 'section_title') ?? $title }}</h2>
 
             <p>
-                {{ $page->section_description ?? 'Details will be updated soon.' }}
+                {{ data_get($page, 'section_description') ?? 'Details will be updated soon.' }}
             </p>
         </div>
 

@@ -3,46 +3,47 @@
 @section('content')
 
 @php
-    $title = $download->hero_title ?? $download->title ?? ucwords(str_replace('-', ' ', $slug));
+    $download = $download ?? null;
+    $title = data_get($download, 'hero_title') ?? data_get($download, 'title') ?? ucwords(str_replace('-', ' ', $slug));
 
     $summaryItems = ($download && !empty($download->summary_items)) ? $download->summary_items : [
-        ['label' => 'Document Type', 'value' => $download->category->name ?? 'Official Document'],
-        ['label' => 'Reference Year', 'value' => $download->year ?? date('Y')],
-        ['label' => 'Authority', 'value' => $download->authority ?? 'Ram Krishna Dwarika College'],
+        ['label' => 'Document Type', 'value' => data_get($download, 'category.name') ?? 'Official Document'],
+        ['label' => 'Reference Year', 'value' => data_get($download, 'year') ?? date('Y')],
+        ['label' => 'Authority', 'value' => data_get($download, 'authority') ?? 'Ram Krishna Dwarika College'],
     ];
 
     $infoCards = ($download && !empty($download->info_cards)) ? $download->info_cards : [
         [
             'icon' => 'bi bi-bank2',
             'title' => 'Issuing Authority',
-            'description' => $download->authority ?? 'Ram Krishna Dwarika College, Patna',
+            'description' => data_get($download, 'authority') ?? 'Ram Krishna Dwarika College, Patna',
         ],
         [
             'icon' => 'bi bi-calendar-check-fill',
             'title' => 'Document Date',
-            'description' => $download->document_date ?? 'Will be updated soon',
+            'description' => data_get($download, 'document_date') ?? 'Will be updated soon',
         ],
         [
             'icon' => 'bi bi-mortarboard-fill',
             'title' => 'Session Reference',
-            'description' => $download->session_reference ?? 'Academic session reference',
+            'description' => data_get($download, 'session_reference') ?? 'Academic session reference',
         ],
         [
             'icon' => 'bi bi-file-earmark-pdf-fill',
             'title' => 'Document Type',
-            'description' => $download->category->name ?? 'Official Document',
+            'description' => data_get($download, 'category.name') ?? 'Official Document',
         ],
     ];
 
     $tableRows = ($download && !empty($download->table_rows)) ? $download->table_rows : [
         [
             'title' => $title,
-            'details' => $download->description ?? 'Official document uploaded on RKD College website.',
+            'details' => data_get($download, 'description') ?? 'Official document uploaded on RKD College website.',
             'button' => 'Download PDF',
         ],
     ];
 
-    $fileUrl = $download->final_download_url ?? null;
+    $fileUrl = data_get($download, 'final_download_url');
 @endphp
 
 <section class="acal-hero-section">
@@ -54,13 +55,13 @@
 
             <span class="acal-kicker">
                 <i class="bi bi-calendar2-week-fill"></i>
-                {{ $download->kicker_text ?? 'Downloads' }}
+                {{ data_get($download, 'kicker_text') ?? 'Downloads' }}
             </span>
 
             <h1>{{ $title }}</h1>
 
             <p>
-                {{ $download->hero_description ?? $download->description ?? 'Official academic document for students and visitors.' }}
+                {{ data_get($download, 'hero_description') ?? data_get($download, 'description') ?? 'Official academic document for students and visitors.' }}
             </p>
 
             <nav class="acal-breadcrumb" aria-label="breadcrumb">
@@ -93,10 +94,10 @@
 
                     <span>Official Document</span>
 
-                    <h2>{{ $download->document_code ?? $download->title ?? $title }}</h2>
+                    <h2>{{ data_get($download, 'document_code') ?? data_get($download, 'title') ?? $title }}</h2>
 
                     <p>
-                        {{ $download->description ?? 'Official document uploaded under downloads section.' }}
+                        {{ data_get($download, 'description') ?? 'Official document uploaded under downloads section.' }}
                     </p>
 
                     <div class="acal-summary-list">

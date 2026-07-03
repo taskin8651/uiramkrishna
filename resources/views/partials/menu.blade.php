@@ -187,7 +187,8 @@
         || request()->is('admin/departments*')
         || request()->is('admin/staff-members*')
         || request()->is('admin/download-categories*')
-        || request()->is('admin/download-items*');
+        || request()->is('admin/download-items*')
+        || request()->is('admin/academic-info-pages*');
 @endphp
 
 @can('academic_course_page_access')
@@ -277,6 +278,14 @@
                    class="sub-link {{ request()->is('admin/download-items*') ? 'active' : '' }}">
                     <i class="fas fa-download"></i>
                     Downloads
+                </a>
+            @endcan
+
+            @can('academic_info_page_access')
+                <a href="{{ route('admin.academic-info-pages.index') }}"
+                   class="sub-link {{ request()->is('admin/academic-info-pages*') ? 'active' : '' }}">
+                    <i class="fas fa-file-alt"></i>
+                    Info Pages
                 </a>
             @endcan
 

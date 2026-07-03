@@ -57,6 +57,7 @@
                     <th style="width:40px;"></th>
                     <th>ID</th>
                     <th>Download</th>
+                    <th>Slug</th>
                     <th>Category</th>
                     <th>Year</th>
                     <th>File</th>
@@ -88,7 +89,7 @@
                                 <div>
                                     <p class="table-main-text">{{ $downloadItem->title }}</p>
                                     <p class="table-sub-text">
-                                        {{ $downloadItem->description ? Str::limit($downloadItem->description, 45) : 'Download Item' }}
+                                        {{ $downloadItem->description ? \Illuminate\Support\Str::limit($downloadItem->description, 45) : 'Download Item' }}
                                     </p>
 
                                     @if($downloadItem->is_featured)
@@ -96,6 +97,10 @@
                                     @endif
                                 </div>
                             </div>
+                        </td>
+
+                        <td style="color:#475569;">
+                            {{ $downloadItem->slug ?: '—' }}
                         </td>
 
                         <td>
@@ -112,7 +117,7 @@
                                    target="_blank"
                                    class="btn-outline">
                                     <i class="fas fa-download"></i>
-                                    File
+                                    Uploaded
                                 </a>
 
                                 @if($downloadItem->download_file_size)
@@ -120,6 +125,13 @@
                                         {{ $downloadItem->download_file_size }}
                                     </p>
                                 @endif
+                            @elseif($downloadItem->external_url)
+                                <a href="{{ $downloadItem->external_url }}"
+                                   target="_blank"
+                                   class="btn-outline">
+                                    <i class="fas fa-link"></i>
+                                    External
+                                </a>
                             @else
                                 <span style="font-size:12px; color:#94A3B8;">No file</span>
                             @endif

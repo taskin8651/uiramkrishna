@@ -20,6 +20,12 @@
       enctype="multipart/form-data">
     @csrf
 
+    @php
+        $summaryItems = old('summary_items', array_fill(0, 3, ['label' => '', 'value' => '']));
+        $infoCards = old('info_cards', array_fill(0, 4, ['icon' => '', 'title' => '', 'description' => '']));
+        $tableRows = old('table_rows', array_fill(0, 3, ['title' => '', 'details' => '', 'button' => '']));
+    @endphp
+
     <div class="admin-form-grid">
 
         <div class="form-card">
@@ -191,6 +197,182 @@
                     </p>
                 </div>
 
+            </div>
+        </div>
+
+        <div class="form-card">
+            <div class="form-card-header">
+                <div class="form-card-icon">
+                    <i class="fas fa-file-alt"></i>
+                </div>
+
+                <div>
+                    <p class="form-card-title">Detail Page Content</p>
+                    <p class="form-card-subtitle">Frontend detail page hero and external URL</p>
+                </div>
+            </div>
+
+            <div class="form-card-body">
+                <div class="field-group">
+                    <label class="field-label" for="slug">Slug</label>
+                    <div class="input-icon-wrap">
+                        <i class="fas fa-link icon"></i>
+                        <input type="text" name="slug" id="slug" value="{{ old('slug') }}" class="field-input {{ $errors->has('slug') ? 'error' : '' }}">
+                    </div>
+                    @if($errors->has('slug'))
+                        <p class="field-error"><i class="fas fa-exclamation-circle"></i> {{ $errors->first('slug') }}</p>
+                    @else
+                        <p class="field-hint">Leave blank to generate from title.</p>
+                    @endif
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label" for="kicker_text">Kicker Text</label>
+                    <div class="input-icon-wrap">
+                        <i class="fas fa-tag icon"></i>
+                        <input type="text" name="kicker_text" id="kicker_text" value="{{ old('kicker_text') }}" class="field-input">
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label" for="hero_title">Hero Title</label>
+                    <div class="input-icon-wrap">
+                        <i class="fas fa-heading icon"></i>
+                        <input type="text" name="hero_title" id="hero_title" value="{{ old('hero_title') }}" class="field-input">
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label" for="hero_description">Hero Description</label>
+                    <textarea name="hero_description" id="hero_description" rows="4" class="field-textarea">{{ old('hero_description') }}</textarea>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label" for="external_url">External URL</label>
+                    <div class="input-icon-wrap">
+                        <i class="fas fa-external-link-alt icon"></i>
+                        <input type="url" name="external_url" id="external_url" value="{{ old('external_url') }}" class="field-input {{ $errors->has('external_url') ? 'error' : '' }}">
+                    </div>
+                    @if($errors->has('external_url'))
+                        <p class="field-error"><i class="fas fa-exclamation-circle"></i> {{ $errors->first('external_url') }}</p>
+                    @else
+                        <p class="field-hint">Used when no uploaded file exists.</p>
+                    @endif
+                </div>
+            </div>
+        </div>
+
+        <div class="form-card">
+            <div class="form-card-header">
+                <div class="form-card-icon">
+                    <i class="fas fa-clipboard-list"></i>
+                </div>
+
+                <div>
+                    <p class="form-card-title">Document Details</p>
+                    <p class="form-card-subtitle">Official document metadata</p>
+                </div>
+            </div>
+
+            <div class="form-card-body">
+                @foreach(['document_code' => 'Document Code', 'authority' => 'Authority', 'document_date' => 'Document Date', 'session_reference' => 'Session Reference', 'class_start' => 'Class Start'] as $field => $label)
+                    <div class="field-group">
+                        <label class="field-label" for="{{ $field }}">{{ $label }}</label>
+                        <div class="input-icon-wrap">
+                            <i class="fas fa-info-circle icon"></i>
+                            <input type="text" name="{{ $field }}" id="{{ $field }}" value="{{ old($field) }}" class="field-input">
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+
+        <div class="form-card">
+            <div class="form-card-header">
+                <div class="form-card-icon">
+                    <i class="fas fa-list"></i>
+                </div>
+
+                <div>
+                    <p class="form-card-title">Summary Items</p>
+                    <p class="form-card-subtitle">Minimum three label and value rows</p>
+                </div>
+            </div>
+
+            <div class="form-card-body">
+                @foreach($summaryItems as $index => $item)
+                    <div class="field-group">
+                        <label class="field-label">Summary Row {{ $index + 1 }}</label>
+                        <div class="input-icon-wrap" style="margin-bottom:10px;">
+                            <i class="fas fa-tag icon"></i>
+                            <input type="text" name="summary_items[{{ $index }}][label]" value="{{ data_get($item, 'label') }}" placeholder="Label" class="field-input">
+                        </div>
+                        <div class="input-icon-wrap">
+                            <i class="fas fa-align-left icon"></i>
+                            <input type="text" name="summary_items[{{ $index }}][value]" value="{{ data_get($item, 'value') }}" placeholder="Value" class="field-input">
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+
+        <div class="form-card">
+            <div class="form-card-header">
+                <div class="form-card-icon">
+                    <i class="fas fa-th-large"></i>
+                </div>
+
+                <div>
+                    <p class="form-card-title">Info Cards</p>
+                    <p class="form-card-subtitle">Minimum four icon, title and description rows</p>
+                </div>
+            </div>
+
+            <div class="form-card-body">
+                @foreach($infoCards as $index => $card)
+                    <div class="field-group">
+                        <label class="field-label">Info Card {{ $index + 1 }}</label>
+                        <div class="input-icon-wrap" style="margin-bottom:10px;">
+                            <i class="fas fa-icons icon"></i>
+                            <input type="text" name="info_cards[{{ $index }}][icon]" value="{{ data_get($card, 'icon') }}" placeholder="bi bi-info-circle-fill" class="field-input">
+                        </div>
+                        <div class="input-icon-wrap" style="margin-bottom:10px;">
+                            <i class="fas fa-heading icon"></i>
+                            <input type="text" name="info_cards[{{ $index }}][title]" value="{{ data_get($card, 'title') }}" placeholder="Title" class="field-input">
+                        </div>
+                        <textarea name="info_cards[{{ $index }}][description]" rows="3" placeholder="Description" class="field-textarea">{{ data_get($card, 'description') }}</textarea>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+
+        <div class="form-card">
+            <div class="form-card-header">
+                <div class="form-card-icon">
+                    <i class="fas fa-table"></i>
+                </div>
+
+                <div>
+                    <p class="form-card-title">Table Rows</p>
+                    <p class="form-card-subtitle">Minimum three table rows for frontend details</p>
+                </div>
+            </div>
+
+            <div class="form-card-body">
+                @foreach($tableRows as $index => $row)
+                    <div class="field-group">
+                        <label class="field-label">Table Row {{ $index + 1 }}</label>
+                        <div class="input-icon-wrap" style="margin-bottom:10px;">
+                            <i class="fas fa-heading icon"></i>
+                            <input type="text" name="table_rows[{{ $index }}][title]" value="{{ data_get($row, 'title') }}" placeholder="Title" class="field-input">
+                        </div>
+                        <textarea name="table_rows[{{ $index }}][details]" rows="3" placeholder="Details" class="field-textarea" style="margin-bottom:10px;">{{ data_get($row, 'details') }}</textarea>
+                        <div class="input-icon-wrap">
+                            <i class="fas fa-mouse-pointer icon"></i>
+                            <input type="text" name="table_rows[{{ $index }}][button]" value="{{ data_get($row, 'button') }}" placeholder="Button Text" class="field-input">
+                        </div>
+                    </div>
+                @endforeach
             </div>
         </div>
 

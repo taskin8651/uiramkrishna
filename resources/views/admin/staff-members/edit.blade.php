@@ -91,6 +91,29 @@
                 </div>
 
                 <div class="field-group">
+                    <label class="field-label" for="staff_type">Staff Type <span class="req">*</span></label>
+
+                    <div class="input-icon-wrap">
+                        <i class="fas fa-users icon"></i>
+
+                        <select name="staff_type"
+                                id="staff_type"
+                                required
+                                class="field-input {{ $errors->has('staff_type') ? 'error' : '' }}">
+                            <option value="teaching" {{ old('staff_type', $staffMember->staff_type) === 'teaching' ? 'selected' : '' }}>Teaching</option>
+                            <option value="non_teaching" {{ old('staff_type', $staffMember->staff_type) === 'non_teaching' ? 'selected' : '' }}>Non-Teaching</option>
+                        </select>
+                    </div>
+
+                    @if($errors->has('staff_type'))
+                        <p class="field-error">
+                            <i class="fas fa-exclamation-circle"></i>
+                            {{ $errors->first('staff_type') }}
+                        </p>
+                    @endif
+                </div>
+
+                <div class="field-group">
                     <label class="field-label" for="sort_order">Sort Order</label>
 
                     <div class="input-icon-wrap">
@@ -138,6 +161,33 @@
                                value="{{ old('designation', $staffMember->designation) }}"
                                class="field-input">
                     </div>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label" for="designation_type">Designation Type</label>
+
+                    <div class="input-icon-wrap">
+                        <i class="fas fa-award icon"></i>
+
+                        <select name="designation_type"
+                                id="designation_type"
+                                class="field-input {{ $errors->has('designation_type') ? 'error' : '' }}">
+                            <option value="">Select Designation Type</option>
+                            <option value="principal" {{ old('designation_type', $staffMember->designation_type) === 'principal' ? 'selected' : '' }}>Principal</option>
+                            <option value="professor" {{ old('designation_type', $staffMember->designation_type) === 'professor' ? 'selected' : '' }}>Professor</option>
+                            <option value="associate" {{ old('designation_type', $staffMember->designation_type) === 'associate' ? 'selected' : '' }}>Associate Professor</option>
+                            <option value="assistant" {{ old('designation_type', $staffMember->designation_type) === 'assistant' ? 'selected' : '' }}>Assistant Professor</option>
+                            <option value="guest" {{ old('designation_type', $staffMember->designation_type) === 'guest' ? 'selected' : '' }}>Guest Faculty</option>
+                            <option value="staff" {{ old('designation_type', $staffMember->designation_type) === 'staff' ? 'selected' : '' }}>Staff</option>
+                        </select>
+                    </div>
+
+                    @if($errors->has('designation_type'))
+                        <p class="field-error">
+                            <i class="fas fa-exclamation-circle"></i>
+                            {{ $errors->first('designation_type') }}
+                        </p>
+                    @endif
                 </div>
 
                 <div class="field-group">
