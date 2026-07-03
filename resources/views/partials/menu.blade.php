@@ -189,7 +189,8 @@
         || request()->is('admin/download-categories*')
         || request()->is('admin/download-items*')
         || request()->is('admin/academic-info-pages*')
-        || request()->is('admin/campus-facilities*');
+        || request()->is('admin/campus-facilities*')
+        || request()->is('admin/learning-facilities*');
 @endphp
 
 @can('academic_course_page_access')
@@ -295,6 +296,14 @@
        class="sub-link {{ request()->is('admin/campus-facilities*') ? 'active' : '' }}">
         <i class="fas fa-building"></i>
         Campus Facilities
+    </a>
+@endcan
+
+@can('learning_facility_access')
+    <a href="{{ route('admin.learning-facilities.index') }}"
+       class="sub-link {{ request()->is('admin/learning-facilities*') ? 'active' : '' }}">
+        <i class="fas fa-laptop-code"></i>
+        Learning Facilities
     </a>
 @endcan
 

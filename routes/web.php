@@ -80,6 +80,10 @@ Route::resource('academic-info-pages', 'AcademicInfoPageController', ['except' =
 // Campus Facilities
 Route::delete('campus-facilities/destroy', 'CampusFacilityController@massDestroy')->name('campus-facilities.massDestroy');
 Route::resource('campus-facilities', 'CampusFacilityController')->except(['show']);
+
+// Learning Facilities
+Route::delete('learning-facilities/destroy', 'LearningFacilityController@massDestroy')->name('learning-facilities.massDestroy');
+Route::resource('learning-facilities', 'LearningFacilityController')->except(['show']);
     });
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {
     // Change password
@@ -126,3 +130,9 @@ Route::get('/conference-room', 'Frontend\CampusFacilityController@conferenceRoom
 Route::get('/smart-room', 'Frontend\CampusFacilityController@smartRoom')->name('frontend.smart-room');
 Route::get('/seminar-hall', 'Frontend\CampusFacilityController@seminarHall')->name('frontend.seminar-hall');
 Route::get('/canteen', 'Frontend\CampusFacilityController@canteen')->name('frontend.canteen');
+
+// Learning Facility Pages
+Route::get('/computer-room', 'Frontend\LearningFacilityController@computerRoom')->name('frontend.computer-room');
+Route::get('/e-library', 'Frontend\LearningFacilityController@eLibrary')->name('frontend.e-library');
+Route::get('/library', 'Frontend\LearningFacilityController@library')->name('frontend.library');
+Route::get('/ict-training-center', 'Frontend\LearningFacilityController@ictTrainingCenter')->name('frontend.ict-training-center');
