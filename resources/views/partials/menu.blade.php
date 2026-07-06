@@ -206,7 +206,8 @@
                 || request()->is('admin/download-items*')
                 || request()->is('admin/academic-info-pages*')
                 || request()->is('admin/campus-facilities*')
-                || request()->is('admin/learning-facilities*');
+                || request()->is('admin/learning-facilities*')
+                || request()->is('admin/quality-document-pages*');
 
             $canAcademicMenu =
                 Gate::allows('academic_course_page_access') ||
@@ -219,7 +220,8 @@
                 Gate::allows('download_item_access') ||
                 Gate::allows('academic_info_page_access') ||
                 Gate::allows('campus_facility_access') ||
-                Gate::allows('learning_facility_access');
+                Gate::allows('learning_facility_access') ||
+                Gate::allows('quality_document_page_access');
         @endphp
 
         @if($canAcademicMenu)
@@ -335,6 +337,14 @@
                             Learning Facilities
                         </a>
                     @endcan
+
+                    @can('quality_document_page_access')
+    <a href="{{ route('admin.quality-document-pages.index') }}"
+       class="sub-link {{ request()->is('admin/quality-document-pages*') ? 'active' : '' }}">
+        <i class="fas fa-file-pdf"></i>
+        Quality Documents
+    </a>
+@endcan
 
                 </div>
             </div>

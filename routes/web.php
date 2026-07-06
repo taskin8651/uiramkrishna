@@ -84,6 +84,10 @@ Route::resource('campus-facilities', 'CampusFacilityController')->except(['show'
 // Learning Facilities
 Route::delete('learning-facilities/destroy', 'LearningFacilityController@massDestroy')->name('learning-facilities.massDestroy');
 Route::resource('learning-facilities', 'LearningFacilityController')->except(['show']);
+
+// Quality Documents
+Route::delete('quality-document-pages/destroy', 'QualityDocumentPageController@massDestroy')->name('quality-document-pages.massDestroy');
+Route::resource('quality-document-pages', 'QualityDocumentPageController')->except(['show']);
     });
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {
     // Change password
@@ -145,3 +149,10 @@ Route::get('/bca-lab', 'Frontend\LearningFacilityController@bcaLab')->name('fron
 Route::get('/zoology-lab', 'Frontend\LearningFacilityController@zoologyLab')->name('frontend.zoology-lab');
 Route::get('/botany-lab', 'Frontend\LearningFacilityController@botanyLab')->name('frontend.botany-lab');
 Route::get('/chemistry-lab', 'Frontend\LearningFacilityController@chemistryLab')->name('frontend.chemistry-lab');
+
+// Quality Document Pages
+Route::get('/aqar', 'Frontend\QualityDocumentPageController@aqar')->name('frontend.aqar');
+Route::get('/naac', 'Frontend\QualityDocumentPageController@naac')->name('frontend.naac');
+Route::get('/iqac', 'Frontend\QualityDocumentPageController@iqac')->name('frontend.iqac');
+Route::get('/ict', 'Frontend\QualityDocumentPageController@ict')->name('frontend.ict');
+Route::get('/ssr', 'Frontend\QualityDocumentPageController@ssr')->name('frontend.ssr');
