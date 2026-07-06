@@ -115,29 +115,35 @@
 
     $fallback = $fallbacks[$slug] ?? $fallbacks['aqar'];
 
-    $prefix = optional($page)->css_prefix ?: $fallback['css_prefix'];
-    $templateType = optional($page)->template_type ?: $fallback['template_type'];
+    $prefix = $fallback['css_prefix'];
+    $templateType = 'grid';
 
-    $subtitleIcon = optional($page)->subtitle_icon ?: $fallback['subtitle_icon'];
-    $subtitleText = optional($page)->subtitle_text ?: $fallback['subtitle_text'];
+    $subtitleIcon = $fallback['subtitle_icon'];
+    $subtitleText = $fallback['subtitle_text'];
     $cardTitle = optional($page)->card_title ?: $fallback['card_title'];
 
-    $officialButtonText = optional($page)->official_button_text ?: $fallback['official_button_text'];
-    $officialButtonUrl = optional($page)->official_button_url ?: $fallback['official_button_url'];
+    $officialButtonText = $fallback['official_button_text'];
+    $officialButtonUrl = $fallback['official_button_url'];
 
     $pdfItems = optional($page)->pdf_items ?: $fallback['pdf_items'];
-    $metaItems = optional($page)->meta_items ?: $fallback['meta_items'];
+    $mediaById = $page ? $page->getMedia('quality_documents')->keyBy('id') : collect();
+    $metaItems = $fallback['meta_items'];
 
-    $previewEnabled = optional($page)->preview_enabled ?? $fallback['preview_enabled'];
+    $previewEnabled = count($pdfItems) > 0;
 
-    $previewSubtitleIcon = optional($page)->preview_subtitle_icon ?: data_get($fallback, 'preview_subtitle_icon', 'bi bi-eye-fill');
-    $previewSubtitleText = optional($page)->preview_subtitle_text ?: data_get($fallback, 'preview_subtitle_text', 'PDF Preview');
-    $previewTitle = optional($page)->preview_title ?: data_get($fallback, 'preview_title', $cardTitle . ' Preview');
-    $previewButtonText = optional($page)->preview_button_text ?: data_get($fallback, 'preview_button_text', 'Open PDF');
-    $previewPdfUrl = optional($page)->preview_pdf_url ?: data_get($fallback, 'preview_pdf_url');
-    $previewIframeTitle = optional($page)->preview_iframe_title ?: data_get($fallback, 'preview_iframe_title', $cardTitle . ' PDF');
+    $previewSubtitleIcon = data_get($fallback, 'preview_subtitle_icon', 'bi bi-eye-fill');
+    $previewSubtitleText = data_get($fallback, 'preview_subtitle_text', 'PDF Preview');
+    $firstPdfUrl = data_get($pdfItems, '0.url');
+    if (! $firstPdfUrl && data_get($pdfItems, '0.media_id')) {
+        $firstPdfUrl = optional($mediaById->get(data_get($pdfItems, '0.media_id')))->getUrl();
+    }
 
-    $downloadButtonText = optional($page)->download_button_text ?: data_get($fallback, 'download_button_text', 'View / Download PDF');
+    $previewPdfUrl = $firstPdfUrl ?: data_get($fallback, 'preview_pdf_url');
+    $previewTitle = data_get($pdfItems, '0.title') ? data_get($pdfItems, '0.title') . ' Preview' : data_get($fallback, 'preview_title', $cardTitle . ' Preview');
+    $previewButtonText = data_get($fallback, 'preview_button_text', 'Open PDF');
+    $previewIframeTitle = 'RKD College ' . strtoupper($slug) . ' PDF';
+
+    $downloadButtonText = data_get($fallback, 'download_button_text', 'View / Download PDF');
 
     $mainPdfUrl = $previewPdfUrl ?: data_get($pdfItems, '0.url');
     $officialHref = $officialButtonUrl && $officialButtonUrl !== '#' ? $officialButtonUrl : '#';
@@ -146,17 +152,17 @@
 
 @if($templateType === 'single_pdf')
     {{-- SINGLE PDF TEMPLATE START --}}
-    <section class="{{ $prefix }}-main-section">
-        <div class="{{ $prefix }}-bg-shape {{ $prefix }}-bg-shape-1"></div>
-        <div class="{{ $prefix }}-bg-shape {{ $prefix }}-bg-shape-2"></div>
+    <section class="aqar-main-section">
+        <div class="aqar-bg-shape aqar-bg-shape-1"></div>
+        <div class="aqar-bg-shape aqar-bg-shape-2"></div>
 
         <div class="container position-relative">
 
-            <div class="{{ $prefix }}-pdf-card">
+            <div class="aqar-pdf-card">
 
-                <div class="{{ $prefix }}-pdf-head">
+                <div class="aqar-pdf-head">
                     <div>
-                        <span class="{{ $prefix }}-subtitle">
+                        <span class="aqar-subtitle">
                             <i class="{{ $subtitleIcon }}"></i>
                             {{ $subtitleText }}
                         </span>
@@ -173,7 +179,7 @@
                 </div>
 
                 @if(count($metaItems))
-                    <div class="{{ $prefix }}-pdf-meta">
+                    <div class="aqar-pdf-meta">
                         @foreach($metaItems as $meta)
                             <div>
                                 <i class="{{ data_get($meta, 'icon', 'bi bi-file-earmark-text-fill') }}"></i>
@@ -185,14 +191,14 @@
                 @endif
 
                 @if($previewEnabled && $mainPdfUrl)
-                    <div class="{{ $prefix }}-pdf-box">
+                    <div class="aqar-pdf-box">
                         <iframe src="{{ $mainPdfUrl }}" title="{{ $previewIframeTitle }}"></iframe>
                     </div>
                 @endif
 
                 @if($mainPdfUrl)
-                    <div class="{{ $prefix }}-pdf-actions">
-                        <a href="{{ $mainPdfUrl }}" target="_blank" class="{{ $prefix }}-download-btn">
+                    <div class="aqar-pdf-actions">
+                        <a href="{{ $mainPdfUrl }}" target="_blank" class="aqar-download-btn">
                             <i class="bi bi-file-earmark-pdf-fill"></i>
                             {{ $downloadButtonText }}
                         </a>
@@ -206,17 +212,17 @@
     {{-- SINGLE PDF TEMPLATE END --}}
 @else
     {{-- GRID TEMPLATE START --}}
-    <section class="{{ $prefix }}-main-section">
-        <div class="{{ $prefix }}-bg-shape {{ $prefix }}-bg-shape-1"></div>
-        <div class="{{ $prefix }}-bg-shape {{ $prefix }}-bg-shape-2"></div>
+    <section class="aqar-main-section">
+        <div class="aqar-bg-shape aqar-bg-shape-1"></div>
+        <div class="aqar-bg-shape aqar-bg-shape-2"></div>
 
         <div class="container position-relative">
 
-            <div class="{{ $prefix }}-card">
+            <div class="aqar-card">
 
-                <div class="{{ $prefix }}-card-head">
+                <div class="aqar-card-head">
                     <div>
-                        <span class="{{ $prefix }}-subtitle">
+                        <span class="aqar-subtitle">
                             <i class="{{ $subtitleIcon }}"></i>
                             {{ $subtitleText }}
                         </span>
@@ -233,20 +239,31 @@
                 </div>
 
                 @if(count($pdfItems))
-                    <div class="{{ $prefix }}-pdf-grid">
+                    <div class="aqar-pdf-grid">
                         @foreach($pdfItems as $item)
-                            <div class="{{ $prefix }}-pdf-item">
-                                <div class="{{ $prefix }}-pdf-icon">
+                            @php
+                                $itemUrl = data_get($item, 'url');
+
+                                if (! $itemUrl && data_get($item, 'media_id')) {
+                                    $itemUrl = optional($mediaById->get(data_get($item, 'media_id')))->getUrl();
+                                }
+                            @endphp
+                            <div class="aqar-pdf-item">
+                                <div class="aqar-pdf-icon">
                                     <i class="{{ data_get($item, 'icon', 'bi bi-file-earmark-pdf-fill') }}"></i>
                                 </div>
 
-                                <div class="{{ $prefix }}-pdf-content">
+                                <div class="aqar-pdf-content">
                                     <h4>{{ data_get($item, 'title') }}</h4>
                                     <p>{{ data_get($item, 'description') }}</p>
                                 </div>
 
-                                @if(data_get($item, 'url'))
-                                    <a href="{{ data_get($item, 'url') }}" target="_blank">
+                                @if($itemUrl)
+                                    <a href="{{ $itemUrl }}"
+                                       target="_blank"
+                                       class="quality-preview-link"
+                                       data-preview-url="{{ $itemUrl }}"
+                                       data-preview-title="{{ data_get($item, 'title', $cardTitle) }} Preview">
                                         {{ data_get($item, 'button_text', 'View PDF') }}
                                         <i class="bi bi-box-arrow-up-right"></i>
                                     </a>
@@ -266,29 +283,29 @@
 
     @if($previewEnabled && $previewPdfUrl)
         {{-- PREVIEW START --}}
-        <section class="{{ $prefix }}-preview-section">
+        <section class="aqar-preview-section" id="qualityPdfPreview">
             <div class="container">
 
-                <div class="{{ $prefix }}-preview-card">
+                <div class="aqar-preview-card">
 
-                    <div class="{{ $prefix }}-preview-head">
+                    <div class="aqar-preview-head">
                         <div>
-                            <span class="{{ $prefix }}-subtitle">
+                            <span class="aqar-subtitle">
                                 <i class="{{ $previewSubtitleIcon }}"></i>
                                 {{ $previewSubtitleText }}
                             </span>
 
-                            <h2>{{ $previewTitle }}</h2>
+                            <h2 data-preview-heading>{{ $previewTitle }}</h2>
                         </div>
 
-                        <a href="{{ $previewPdfUrl }}" target="_blank" class="btn btn-outline-main">
+                        <a href="{{ $previewPdfUrl }}" target="_blank" class="btn btn-outline-main" data-preview-open>
                             {{ $previewButtonText }}
                             <i class="bi bi-box-arrow-up-right"></i>
                         </a>
                     </div>
 
-                    <div class="{{ $prefix }}-pdf-box">
-                        <iframe src="{{ $previewPdfUrl }}" title="{{ $previewIframeTitle }}"></iframe>
+                    <div class="aqar-pdf-box">
+                        <iframe src="{{ $previewPdfUrl }}" title="{{ $previewIframeTitle }}" data-preview-frame></iframe>
                     </div>
 
                 </div>
@@ -298,5 +315,40 @@
         {{-- PREVIEW END --}}
     @endif
 @endif
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var previewSection = document.getElementById('qualityPdfPreview');
+
+        if (!previewSection) {
+            return;
+        }
+
+        var frame = previewSection.querySelector('[data-preview-frame]');
+        var heading = previewSection.querySelector('[data-preview-heading]');
+        var openButton = previewSection.querySelector('[data-preview-open]');
+
+        document.querySelectorAll('.quality-preview-link').forEach(function (link) {
+            link.addEventListener('click', function (event) {
+                var previewUrl = link.dataset.previewUrl;
+
+                if (!previewUrl || !frame || !openButton) {
+                    return;
+                }
+
+                event.preventDefault();
+
+                frame.src = previewUrl;
+                openButton.href = previewUrl;
+
+                if (heading && link.dataset.previewTitle) {
+                    heading.textContent = link.dataset.previewTitle;
+                }
+
+                previewSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    });
+</script>
 
 @endsection
