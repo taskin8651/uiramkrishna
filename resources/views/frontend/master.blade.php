@@ -391,59 +391,6 @@
 
 
 
-<!-- NOTICE TICKER START -->
-<section class="notice-ticker">
-  <div class="container-fluid px-lg-5">
-    <div class="ticker-box">
-
-      <div class="ticker-label">
-        <span class="ticker-icon">
-          <i class="bi bi-megaphone-fill"></i>
-        </span>
-        <div>
-          <strong>Latest Updates</strong>
-          <small>Important Announcements</small>
-        </div>
-      </div>
-
-      <div class="ticker-content">
-        <marquee behavior="scroll" direction="left" scrollamount="5" onmouseover="this.stop();"
-          onmouseout="this.start();">
-
-          <a href="#">
-            <span class="ticker-badge new">New</span>
-            UG Admission Notice 2026-27 is available now.
-          </a>
-
-          <a href="#">
-            <span class="ticker-badge important">Important</span>
-            Examination form submission schedule published.
-          </a>
-
-          <a href="#">
-            <span class="ticker-badge notice">Notice</span>
-            Scholarship portal link updated for students.
-          </a>
-
-          <a href="#">
-            <span class="ticker-badge naac">NAAC</span>
-            IQAC meeting minutes and AQAR documents available.
-          </a>
-
-        </marquee>
-      </div>
-
-      <div class="ticker-action">
-        <a href="#notices">
-          View All
-          <i class="bi bi-arrow-right"></i>
-        </a>
-      </div>
-
-    </div>
-  </div>
-</section>
-<!-- NOTICE TICKER END -->
 
 
 @yield('content')
