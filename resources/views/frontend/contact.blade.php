@@ -101,56 +101,110 @@
 
       <div class="contact-form-card">
 
-        <div class="contact-form-head">
-          <span class="contact-subtitle">
+    <div class="contact-form-head">
+        <span class="contact-subtitle">
             <i class="bi bi-envelope-paper-fill"></i>
             Enquiry / Feedback Form
-          </span>
+        </span>
 
-          <h2>Send Your Query</h2>
+        <h2>Send Your Query</h2>
+    </div>
+
+    @if(session('message'))
+        <div class="alert alert-success" style="margin-bottom:18px;">
+            {{ session('message') }}
+        </div>
+    @endif
+
+    @if($errors->any())
+        <div class="alert alert-danger" style="margin-bottom:18px;">
+            Please check the form fields and try again.
+        </div>
+    @endif
+
+    <form class="contact-form"
+          action="{{ route('frontend.contact-enquiry.store') }}"
+          method="post">
+        @csrf
+
+        <div class="row g-3">
+
+            <div class="col-md-6">
+                <label>Name :</label>
+                <input type="text"
+                       name="name"
+                       value="{{ old('name') }}"
+                       placeholder="Enter your name"
+                       class="{{ $errors->has('name') ? 'is-invalid' : '' }}">
+
+                @if($errors->has('name'))
+                    <small class="text-danger">{{ $errors->first('name') }}</small>
+                @endif
+            </div>
+
+            <div class="col-md-6">
+                <label>Email :</label>
+                <input type="email"
+                       name="email"
+                       value="{{ old('email') }}"
+                       placeholder="Enter your email"
+                       class="{{ $errors->has('email') ? 'is-invalid' : '' }}">
+
+                @if($errors->has('email'))
+                    <small class="text-danger">{{ $errors->first('email') }}</small>
+                @endif
+            </div>
+
+            <div class="col-md-6">
+                <label>Contact No. :</label>
+                <input type="text"
+                       name="phone"
+                       value="{{ old('phone') }}"
+                       placeholder="Enter contact number"
+                       class="{{ $errors->has('phone') ? 'is-invalid' : '' }}">
+
+                @if($errors->has('phone'))
+                    <small class="text-danger">{{ $errors->first('phone') }}</small>
+                @endif
+            </div>
+
+            <div class="col-md-6">
+                <label>Subject :</label>
+                <input type="text"
+                       name="subject"
+                       value="{{ old('subject') }}"
+                       placeholder="Enter subject"
+                       class="{{ $errors->has('subject') ? 'is-invalid' : '' }}">
+
+                @if($errors->has('subject'))
+                    <small class="text-danger">{{ $errors->first('subject') }}</small>
+                @endif
+            </div>
+
+            <div class="col-12">
+                <label>Message / Query :</label>
+                <textarea name="message"
+                          rows="5"
+                          placeholder="Write your message or query"
+                          class="{{ $errors->has('message') ? 'is-invalid' : '' }}">{{ old('message') }}</textarea>
+
+                @if($errors->has('message'))
+                    <small class="text-danger">{{ $errors->first('message') }}</small>
+                @endif
+            </div>
+
+            <div class="col-12">
+                <button type="submit" class="contact-submit-btn">
+                    <i class="bi bi-send-fill"></i>
+                    Submit Query
+                </button>
+            </div>
+
         </div>
 
-        <form class="contact-form" action="#" method="post">
+    </form>
 
-          <div class="row g-3">
-
-            <div class="col-md-6">
-              <label>Name :</label>
-              <input type="text" name="name" placeholder="Enter your name">
-            </div>
-
-            <div class="col-md-6">
-              <label>Email :</label>
-              <input type="email" name="email" placeholder="Enter your email">
-            </div>
-
-            <div class="col-md-6">
-              <label>Contact No. :</label>
-              <input type="text" name="phone" placeholder="Enter contact number">
-            </div>
-
-            <div class="col-md-6">
-              <label>Subject :</label>
-              <input type="text" name="subject" placeholder="Enter subject">
-            </div>
-
-            <div class="col-12">
-              <label>Message / Query :</label>
-              <textarea name="message" rows="5" placeholder="Write your message or query"></textarea>
-            </div>
-
-            <div class="col-12">
-              <button type="submit" class="contact-submit-btn">
-                <i class="bi bi-send-fill"></i>
-                Submit Query
-              </button>
-            </div>
-
-          </div>
-
-        </form>
-
-      </div>
+</div>
 
     </div>
   </section>

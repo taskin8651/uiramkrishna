@@ -91,6 +91,12 @@ Route::resource('quality-document-pages', 'QualityDocumentPageController')->exce
 
 // Feedback Documents
 Route::resource('feedback-documents', 'FeedbackDocumentController')->except(['show']);
+
+Route::resource('contact-enquiries', 'ContactEnquiryController')->only([
+    'index',
+    'show',
+    'destroy',
+]);
     });
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {
     // Change password
