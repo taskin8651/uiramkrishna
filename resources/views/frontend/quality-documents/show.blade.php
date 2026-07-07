@@ -111,6 +111,175 @@
             'preview_enabled' => false,
             'download_button_text' => 'View / Download SSR PDF',
         ],
+
+        'ncc' => [
+            'css_prefix' => 'aqar',
+            'template_type' => 'grid',
+            'subtitle_icon' => 'bi bi-file-earmark-pdf-fill',
+            'subtitle_text' => 'Official PDFs',
+            'card_title' => 'NCC Documents',
+            'official_button_text' => 'Official Page',
+            'official_button_url' => '#',
+            'pdf_items' => [],
+            'meta_items' => [],
+            'preview_enabled' => false,
+        ],
+
+        'nss' => [
+            'css_prefix' => 'aqar',
+            'template_type' => 'grid',
+            'subtitle_icon' => 'bi bi-file-earmark-pdf-fill',
+            'subtitle_text' => 'Official PDFs',
+            'card_title' => 'NSS Documents',
+            'official_button_text' => 'Official Page',
+            'official_button_url' => '#',
+            'pdf_items' => [],
+            'meta_items' => [],
+            'preview_enabled' => false,
+        ],
+
+        'sports' => [
+            'css_prefix' => 'aqar',
+            'template_type' => 'grid',
+            'subtitle_icon' => 'bi bi-file-earmark-pdf-fill',
+            'subtitle_text' => 'Official PDFs',
+            'card_title' => 'Sports Documents',
+            'official_button_text' => 'Official Page',
+            'official_button_url' => '#',
+            'pdf_items' => [],
+            'meta_items' => [],
+            'preview_enabled' => false,
+        ],
+
+        'cultural' => [
+            'css_prefix' => 'aqar',
+            'template_type' => 'grid',
+            'subtitle_icon' => 'bi bi-file-earmark-pdf-fill',
+            'subtitle_text' => 'Official PDFs',
+            'card_title' => 'Cultural Activities Documents',
+            'official_button_text' => 'Official Page',
+            'official_button_url' => '#',
+            'pdf_items' => [],
+            'meta_items' => [],
+            'preview_enabled' => false,
+        ],
+
+        'icc' => [
+            'css_prefix' => 'aqar',
+            'template_type' => 'grid',
+            'subtitle_icon' => 'bi bi-file-earmark-pdf-fill',
+            'subtitle_text' => 'Official PDFs',
+            'card_title' => 'ICC Documents',
+            'official_button_text' => 'Official Page',
+            'official_button_url' => '#',
+            'pdf_items' => [],
+            'meta_items' => [],
+            'preview_enabled' => false,
+        ],
+
+        'gender-sensitization' => [
+            'css_prefix' => 'aqar',
+            'template_type' => 'grid',
+            'subtitle_icon' => 'bi bi-file-earmark-pdf-fill',
+            'subtitle_text' => 'Official PDFs',
+            'card_title' => 'Gender Sensitization Documents',
+            'official_button_text' => 'Official Page',
+            'official_button_url' => '#',
+            'pdf_items' => [],
+            'meta_items' => [],
+            'preview_enabled' => false,
+        ],
+
+        'placement-cell' => [
+            'css_prefix' => 'aqar',
+            'template_type' => 'grid',
+            'subtitle_icon' => 'bi bi-file-earmark-pdf-fill',
+            'subtitle_text' => 'Official PDFs',
+            'card_title' => 'Placement Cell Documents',
+            'official_button_text' => 'Official Page',
+            'official_button_url' => '#',
+            'pdf_items' => [],
+            'meta_items' => [],
+            'preview_enabled' => false,
+        ],
+
+        'counselling-cell' => [
+            'css_prefix' => 'aqar',
+            'template_type' => 'grid',
+            'subtitle_icon' => 'bi bi-file-earmark-pdf-fill',
+            'subtitle_text' => 'Official PDFs',
+            'card_title' => 'Counselling Cell Documents',
+            'official_button_text' => 'Official Page',
+            'official_button_url' => '#',
+            'pdf_items' => [],
+            'meta_items' => [],
+            'preview_enabled' => false,
+        ],
+
+        'skill-development-entrepreneurship-cell' => [
+            'css_prefix' => 'aqar',
+            'template_type' => 'grid',
+            'subtitle_icon' => 'bi bi-file-earmark-pdf-fill',
+            'subtitle_text' => 'Official PDFs',
+            'card_title' => 'Skill Development Documents',
+            'official_button_text' => 'Official Page',
+            'official_button_url' => '#',
+            'pdf_items' => [],
+            'meta_items' => [],
+            'preview_enabled' => false,
+        ],
+
+        'departmental-activities' => [
+            'css_prefix' => 'aqar',
+            'template_type' => 'grid',
+            'subtitle_icon' => 'bi bi-file-earmark-pdf-fill',
+            'subtitle_text' => 'Official PDFs',
+            'card_title' => 'Departmental Activities Documents',
+            'official_button_text' => 'Official Page',
+            'official_button_url' => '#',
+            'pdf_items' => [],
+            'meta_items' => [],
+            'preview_enabled' => false,
+        ],
+
+        'webinar' => [
+            'css_prefix' => 'aqar',
+            'template_type' => 'grid',
+            'subtitle_icon' => 'bi bi-file-earmark-pdf-fill',
+            'subtitle_text' => 'Official PDFs',
+            'card_title' => 'Webinar Documents',
+            'official_button_text' => 'Official Page',
+            'official_button_url' => '#',
+            'pdf_items' => [],
+            'meta_items' => [],
+            'preview_enabled' => false,
+        ],
+
+        'workshop-activities' => [
+            'css_prefix' => 'aqar',
+            'template_type' => 'grid',
+            'subtitle_icon' => 'bi bi-file-earmark-pdf-fill',
+            'subtitle_text' => 'Official PDFs',
+            'card_title' => 'Workshop Activities Documents',
+            'official_button_text' => 'Official Page',
+            'official_button_url' => '#',
+            'pdf_items' => [],
+            'meta_items' => [],
+            'preview_enabled' => false,
+        ],
+
+        'college-events' => [
+            'css_prefix' => 'aqar',
+            'template_type' => 'grid',
+            'subtitle_icon' => 'bi bi-file-earmark-pdf-fill',
+            'subtitle_text' => 'Official PDFs',
+            'card_title' => 'College Events Documents',
+            'official_button_text' => 'Official Page',
+            'official_button_url' => '#',
+            'pdf_items' => [],
+            'meta_items' => [],
+            'preview_enabled' => false,
+        ],
     ];
 
     $fallback = $fallbacks[$slug] ?? $fallbacks['aqar'];
@@ -351,4 +520,208 @@
     });
 </script>
 
+
+<!-- QUICK LINKS START -->
+<section class="iqac-link-section">
+    <div class="container">
+
+        <div class="iqac-link-card">
+
+            <div class="iqac-link-head">
+                <div>
+                    <span class="iqac-subtitle">
+                        <i class="bi bi-grid-fill"></i>
+                        Quick Links
+                    </span>
+
+                    <h2>Important Quick Links</h2>
+                </div>
+            </div>
+
+            @php
+                $quickLinks = [
+                    [
+                        'title' => 'NAAC & Accreditation',
+                        'icon'  => 'bi bi-award-fill',
+                        'url'   => url('/naac'),
+                        'slug'  => 'naac',
+                    ],
+                    [
+                        'title' => 'AQAR Reports',
+                        'icon'  => 'bi bi-file-earmark-pdf-fill',
+                        'url'   => url('/aqar'),
+                        'slug'  => 'aqar',
+                    ],
+                    [
+                        'title' => 'IQAC Documents',
+                        'icon'  => 'bi bi-bank2',
+                        'url'   => url('/iqac'),
+                        'slug'  => 'iqac',
+                    ],
+                    [
+                        'title' => 'ICT Documents',
+                        'icon'  => 'bi bi-laptop-fill',
+                        'url'   => url('/ict'),
+                        'slug'  => 'ict',
+                    ],
+                    [
+                        'title' => 'SSR',
+                        'icon'  => 'bi bi-clipboard-check-fill',
+                        'url'   => url('/ssr'),
+                        'slug'  => 'ssr',
+                    ],
+                    [
+                        'title' => 'NCC',
+                        'icon'  => 'bi bi-award-fill',
+                        'url'   => url('/ncc'),
+                        'slug'  => 'ncc',
+                    ],
+                    [
+                        'title' => 'NSS',
+                        'icon'  => 'bi bi-people-fill',
+                        'url'   => url('/nss'),
+                        'slug'  => 'nss',
+                    ],
+                    [
+                        'title' => 'Sports',
+                        'icon'  => 'bi bi-trophy-fill',
+                        'url'   => url('/sports'),
+                        'slug'  => 'sports',
+                    ],
+                    [
+                        'title' => 'Cultural Activities',
+                        'icon'  => 'bi bi-music-note-beamed',
+                        'url'   => url('/cultural'),
+                        'slug'  => 'cultural',
+                    ],
+                    [
+                        'title' => 'ICC',
+                        'icon'  => 'bi bi-shield-check',
+                        'url'   => url('/icc'),
+                        'slug'  => 'icc',
+                    ],
+                    [
+                        'title' => 'Gender Sensitization',
+                        'icon'  => 'bi bi-gender-ambiguous',
+                        'url'   => url('/gender-sensitization'),
+                        'slug'  => 'gender-sensitization',
+                    ],
+                    [
+                        'title' => 'Placement Cell',
+                        'icon'  => 'bi bi-briefcase-fill',
+                        'url'   => url('/placement-cell'),
+                        'slug'  => 'placement-cell',
+                    ],
+                    [
+                        'title' => 'Counselling Cell',
+                        'icon'  => 'bi bi-chat-dots-fill',
+                        'url'   => url('/counselling-cell'),
+                        'slug'  => 'counselling-cell',
+                    ],
+                    [
+                        'title' => 'Skill Development',
+                        'icon'  => 'bi bi-lightbulb-fill',
+                        'url'   => url('/skill-development-entrepreneurship-cell'),
+                        'slug'  => 'skill-development-entrepreneurship-cell',
+                    ],
+                    [
+                        'title' => 'Departmental Activities',
+                        'icon'  => 'bi bi-calendar-check-fill',
+                        'url'   => url('/departmental-activities'),
+                        'slug'  => 'departmental-activities',
+                    ],
+                    [
+                        'title' => 'Webinar',
+                        'icon'  => 'bi bi-camera-video-fill',
+                        'url'   => url('/webinar'),
+                        'slug'  => 'webinar',
+                    ],
+                    [
+                        'title' => 'Workshop Activities',
+                        'icon'  => 'bi bi-tools',
+                        'url'   => url('/workshop-activities'),
+                        'slug'  => 'workshop-activities',
+                    ],
+                    [
+                        'title' => 'College Events',
+                        'icon'  => 'bi bi-images',
+                        'url'   => url('/college-events'),
+                        'slug'  => 'college-events',
+                    ],
+                    [
+                        'title' => 'Departments',
+                        'icon'  => 'bi bi-diagram-3-fill',
+                        'url'   => url('/departments'),
+                        'slug'  => 'departments',
+                    ],
+                    [
+                        'title' => 'Student Zone',
+                        'icon'  => 'bi bi-person-lines-fill',
+                        'url'   => route('frontend.downloads'),
+                        'slug'  => 'student-zone',
+                    ],
+                    [
+                        'title' => 'Exam & Results',
+                        'icon'  => 'bi bi-file-earmark-check-fill',
+                        'url'   => url('/#examination'),
+                        'slug'  => 'examination',
+                    ],
+                    [
+                        'title' => 'Alumni',
+                        'icon'  => 'bi bi-people-fill',
+                        'url'   => url('/alumni'),
+                        'slug'  => 'alumni',
+                    ],
+                    
+                ];
+            @endphp
+
+            <div class="iqac-link-grid">
+                @foreach($quickLinks as $link)
+                    <a href="{{ $link['url'] }}"
+                       class="{{ ($slug ?? '') === $link['slug'] ? 'active' : '' }}">
+                        <i class="{{ $link['icon'] }}"></i>
+                        {{ $link['title'] }}
+                    </a>
+                @endforeach
+            </div>
+
+        </div>
+
+    </div>
+</section>
+<!-- QUICK LINKS END -->
+
+
+<!-- IMPORTANT LINKS START -->
+<section class="iqac-link-section">
+  <div class="container">
+
+    <div class="iqac-link-card">
+
+      <div class="iqac-link-head">
+        <div>
+          <span class="iqac-subtitle">
+            <i class="bi bi-link-45deg"></i>
+            Important Links
+          </span>
+
+          <h2>Important Links</h2>
+        </div>
+      </div>
+
+      <div class="iqac-link-grid">
+        <a href="https://www.ppup.ac.in/" target="_blank"><i class="bi bi-bank2"></i>Patliputra University</a>
+        <a href="https://rti.gov.in/" target="_blank"><i class="bi bi-file-lock2-fill"></i>RTI</a>
+        <a href="https://www.ugc.ac.in/" target="_blank"><i class="bi bi-mortarboard-fill"></i>UGC</a>
+        <a href="https://www.aicte-india.org/" target="_blank"><i class="bi bi-patch-check-fill"></i>AICTE</a>
+        <a href="https://www.naac.gov.in/" target="_blank"><i class="bi bi-award-fill"></i>NAAC</a>
+        <a href="https://www.india.gov.in/" target="_blank"><i class="bi bi-globe-central-south-asia"></i>National Portal of India</a>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+<!-- IMPORTANT LINKS END -->
 @endsection

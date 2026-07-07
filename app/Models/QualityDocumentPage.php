@@ -18,9 +18,14 @@ class QualityDocumentPage extends Model implements HasMedia
     ];
 
     protected $casts = [
-        'pdf_items'       => 'array',
-        'status'          => 'boolean',
+        'pdf_items' => 'array',
+        'status'    => 'boolean',
     ];
+
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
 
     public function scopeActive($query)
     {

@@ -88,6 +88,9 @@ Route::resource('learning-facilities', 'LearningFacilityController')->except(['s
 // Quality Documents
 Route::delete('quality-document-pages/destroy', 'QualityDocumentPageController@massDestroy')->name('quality-document-pages.massDestroy');
 Route::resource('quality-document-pages', 'QualityDocumentPageController')->except(['show']);
+
+// Feedback Documents
+Route::resource('feedback-documents', 'FeedbackDocumentController')->except(['show']);
     });
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {
     // Change password
@@ -156,3 +159,54 @@ Route::get('/naac', 'Frontend\QualityDocumentPageController@naac')->name('fronte
 Route::get('/iqac', 'Frontend\QualityDocumentPageController@iqac')->name('frontend.iqac');
 Route::get('/ict', 'Frontend\QualityDocumentPageController@ict')->name('frontend.ict');
 Route::get('/ssr', 'Frontend\QualityDocumentPageController@ssr')->name('frontend.ssr');
+
+Route::get('/ncc', 'Frontend\QualityDocumentPageController@ncc')->name('frontend.ncc');
+Route::get('/nss', 'Frontend\QualityDocumentPageController@nss')->name('frontend.nss');
+Route::get('/sports', 'Frontend\QualityDocumentPageController@sports')->name('frontend.sports');
+Route::get('/cultural', 'Frontend\QualityDocumentPageController@cultural')->name('frontend.cultural');
+
+Route::get('/icc', 'Frontend\QualityDocumentPageController@icc')->name('frontend.icc');
+Route::get('/gender-sensitization', 'Frontend\QualityDocumentPageController@genderSensitization')->name('frontend.gender-sensitization');
+
+Route::get('/placement-cell', 'Frontend\QualityDocumentPageController@placementCell')->name('frontend.placement-cell');
+Route::get('/counselling-cell', 'Frontend\QualityDocumentPageController@counsellingCell')->name('frontend.counselling-cell');
+Route::get('/skill-development-entrepreneurship-cell', 'Frontend\QualityDocumentPageController@skillDevelopmentEntrepreneurshipCell')->name('frontend.skill-development-entrepreneurship-cell');
+
+Route::get('/departmental-activities', 'Frontend\QualityDocumentPageController@departmentalActivities')->name('frontend.departmental-activities');
+Route::get('/webinar', 'Frontend\QualityDocumentPageController@webinar')->name('frontend.webinar');
+Route::get('/workshop-activities', 'Frontend\QualityDocumentPageController@workshopActivities')->name('frontend.workshop-activities');
+Route::get('/college-events', 'Frontend\QualityDocumentPageController@collegeEvents')->name('frontend.college-events');
+
+foreach ([
+    'aqar',
+    'naac',
+    'iqac',
+    'ict',
+    'ssr',
+    'ncc',
+    'nss',
+    'sports',
+    'cultural',
+    'icc',
+    'gender-sensitization',
+    'placement-cell',
+    'counselling-cell',
+    'skill-development-entrepreneurship-cell',
+    'departmental-activities',
+    'webinar',
+    'workshop-activities',
+    'college-events',
+] as $qualitySlug) {
+    Route::redirect('/' . $qualitySlug . '.html', '/' . $qualitySlug);
+}
+
+Route::redirect('/examination', '/#examination');
+Route::redirect('/examination.html', '/#examination');
+Route::redirect('/student-zone', '/downloads');
+Route::redirect('/student-zone.html', '/downloads');
+Route::redirect('/tender', '/#important-links');
+Route::redirect('/tender.html', '/#important-links');
+
+Route::get('/student-feedback', 'Frontend\FeedbackDocumentController@student')->name('frontend.student-feedback');
+Route::get('/teacher-feedback', 'Frontend\FeedbackDocumentController@teacher')->name('frontend.teacher-feedback');
+Route::get('/alumni-feedback', 'Frontend\FeedbackDocumentController@alumni')->name('frontend.alumni-feedback');

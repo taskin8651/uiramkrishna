@@ -272,8 +272,8 @@
             </li>
 
             <li class="nav-item"><a class="nav-link" href="admission.html">Admission</a></li>
-            <li class="nav-item"><a class="nav-link" href="examination.html">Examination</a></li>
-            <li class="nav-item"><a class="nav-link" href="student-zone.html">Student Zone</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ url('/#examination') }}">Examination</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ route('frontend.downloads') }}">Student Zone</a></li>
             <li class="nav-item"><a class="nav-link" href="research.html">Research</a></li>
 
             <!-- NAAC -->
@@ -324,8 +324,8 @@
 
                   <div class="mega-col">
                     <h6><i class="bi bi-flag"></i> Student Units</h6>
-                    <a href="ncc.html">NCC Report</a>
-                    <a href="nss.html">NSS Report</a>
+                    <a href="{{ route('frontend.ncc') }}">NCC Report</a>
+                    <a href="{{ route('frontend.nss') }}">NSS Report</a>
                     <a href="sports.html">Sports</a>
                     <a href="cultural-report.html">Cultural Report</a>
                   </div>
@@ -340,8 +340,8 @@
 
                   <div class="mega-col">
                     <h6><i class="bi bi-briefcase"></i> Career Cells</h6>
-                    <a href="placement-cell.html">Placement Cell</a>
-                    <a href="counselling-cell.html">Counselling Cell</a>
+                    <a href="{{ route('frontend.placement-cell') }}">Placement Cell</a>
+                    <a href="{{ route('frontend.counselling-cell') }}">Counselling Cell</a>
                     <a href="skill-development-cell.html">Skill Development Cell</a>
                     <a href="entrepreneurship-cell.html">Entrepreneurship Cell</a>
                   </div>
@@ -351,7 +351,7 @@
                     <a href="departmental-activities.html">Departmental Activities</a>
                     <a href="webinar.html">Webinar</a>
                     <a href="workshop.html">Workshop</a>
-                    <a href="college-events.html">College Events</a>
+                    <a href="{{ route('frontend.college-events') }}">College Events</a>
                   </div>
 
                 </div>
@@ -364,9 +364,9 @@
                 Feedback
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="student-feedback.html"><i class="bi bi-chat-square-text"></i> Student's Feedback</a></li>
-                <li><a class="dropdown-item" href="teacher-feedback.html"><i class="bi bi-chat-left-dots"></i> Teachers' Feedback</a></li>
-                <li><a class="dropdown-item" href="alumni-feedback.html"><i class="bi bi-people"></i> Alumni Feedback</a></li>
+                <li><a class="dropdown-item" href="{{ route('frontend.student-feedback') }}"><i class="bi bi-chat-square-text"></i> Student's Feedback</a></li>
+                <li><a class="dropdown-item" href="{{ route('frontend.teacher-feedback') }}"><i class="bi bi-chat-left-dots"></i> Teachers' Feedback</a></li>
+                <li><a class="dropdown-item" href="{{ route('frontend.alumni-feedback') }}"><i class="bi bi-people"></i> Alumni Feedback</a></li>
               </ul>
             </li>
 

@@ -207,7 +207,8 @@
                 || request()->is('admin/academic-info-pages*')
                 || request()->is('admin/campus-facilities*')
                 || request()->is('admin/learning-facilities*')
-                || request()->is('admin/quality-document-pages*');
+                || request()->is('admin/quality-document-pages*')
+                || request()->is('admin/feedback-documents*');
 
             $canAcademicMenu =
                 Gate::allows('academic_course_page_access') ||
@@ -221,7 +222,8 @@
                 Gate::allows('academic_info_page_access') ||
                 Gate::allows('campus_facility_access') ||
                 Gate::allows('learning_facility_access') ||
-                Gate::allows('quality_document_page_access');
+                Gate::allows('quality_document_page_access') ||
+                Gate::allows('feedback_document_access');
         @endphp
 
         @if($canAcademicMenu)
@@ -346,11 +348,174 @@
     </a>
 @endcan
 
+                    @can('feedback_document_access')
+                        <a href="{{ route('admin.feedback-documents.index') }}"
+                           class="sub-link {{ request()->is('admin/feedback-documents*') ? 'active' : '' }}">
+                            <i class="fas fa-comments"></i>
+                            Feedback Documents
+                        </a>
+                    @endcan
+
                 </div>
             </div>
 
             <div class="nav-divider"></div>
         @endif
+
+        {{-- QUALITY DOCUMENTS GROUP --}}
+@php
+    $qualityActive = request()->is('admin/quality-document-pages*');
+
+    $canQualityMenu = Gate::allows('quality_document_page_access');
+@endphp
+
+@if($canQualityMenu)
+    <div x-data="{ open: {{ $qualityActive ? 'true' : 'false' }} }">
+
+        <button type="button"
+                @click="open = !open"
+                data-tooltip="Quality Docs"
+                class="nav-link nav-group-btn {{ $qualityActive ? 'active' : '' }}">
+
+            <div class="nav-group-left">
+                <i class="fas fa-file-pdf nav-icon"></i>
+                <span class="nav-label">Quality Documents</span>
+            </div>
+
+            <i class="fas fa-chevron-right chevron"
+               :style="open ? 'transform:rotate(90deg)' : ''"></i>
+        </button>
+
+        <div class="submenu"
+             x-show="open"
+             x-transition:enter="transition ease-out duration-150"
+             x-transition:enter-start="opacity-0 -translate-y-1"
+             x-transition:enter-end="opacity-100 translate-y-0"
+             x-transition:leave="transition ease-in duration-100"
+             x-transition:leave-start="opacity-100 translate-y-0"
+             x-transition:leave-end="opacity-0 -translate-y-1">
+
+            <a href="{{ route('admin.quality-document-pages.index') }}"
+               class="sub-link {{ request()->routeIs('admin.quality-document-pages.index') ? 'active' : '' }}">
+                <i class="fas fa-list"></i>
+                All Documents
+            </a>
+
+            @can('quality_document_page_edit')
+                <a href="{{ route('admin.quality-document-pages.edit', 'aqar') }}"
+                   class="sub-link {{ request()->is('admin/quality-document-pages/aqar*') ? 'active' : '' }}">
+                    <i class="fas fa-file-pdf"></i>
+                    AQAR
+                </a>
+
+                <a href="{{ route('admin.quality-document-pages.edit', 'naac') }}"
+                   class="sub-link {{ request()->is('admin/quality-document-pages/naac*') ? 'active' : '' }}">
+                    <i class="fas fa-award"></i>
+                    NAAC
+                </a>
+
+                <a href="{{ route('admin.quality-document-pages.edit', 'iqac') }}"
+                   class="sub-link {{ request()->is('admin/quality-document-pages/iqac*') ? 'active' : '' }}">
+                    <i class="fas fa-university"></i>
+                    IQAC
+                </a>
+
+                <a href="{{ route('admin.quality-document-pages.edit', 'ict') }}"
+                   class="sub-link {{ request()->is('admin/quality-document-pages/ict*') ? 'active' : '' }}">
+                    <i class="fas fa-laptop"></i>
+                    ICT
+                </a>
+
+                <a href="{{ route('admin.quality-document-pages.edit', 'ssr') }}"
+                   class="sub-link {{ request()->is('admin/quality-document-pages/ssr*') ? 'active' : '' }}">
+                    <i class="fas fa-clipboard-list"></i>
+                    SSR
+                </a>
+
+                <a href="{{ route('admin.quality-document-pages.edit', 'ncc') }}"
+                   class="sub-link {{ request()->is('admin/quality-document-pages/ncc*') ? 'active' : '' }}">
+                    <i class="fas fa-medal"></i>
+                    NCC
+                </a>
+
+                <a href="{{ route('admin.quality-document-pages.edit', 'nss') }}"
+                   class="sub-link {{ request()->is('admin/quality-document-pages/nss*') ? 'active' : '' }}">
+                    <i class="fas fa-hands-helping"></i>
+                    NSS
+                </a>
+
+                <a href="{{ route('admin.quality-document-pages.edit', 'sports') }}"
+                   class="sub-link {{ request()->is('admin/quality-document-pages/sports*') ? 'active' : '' }}">
+                    <i class="fas fa-running"></i>
+                    Sports
+                </a>
+
+                <a href="{{ route('admin.quality-document-pages.edit', 'cultural') }}"
+                   class="sub-link {{ request()->is('admin/quality-document-pages/cultural*') ? 'active' : '' }}">
+                    <i class="fas fa-music"></i>
+                    Cultural
+                </a>
+
+                <a href="{{ route('admin.quality-document-pages.edit', 'icc') }}"
+                   class="sub-link {{ request()->is('admin/quality-document-pages/icc*') ? 'active' : '' }}">
+                    <i class="fas fa-balance-scale"></i>
+                    ICC
+                </a>
+
+                <a href="{{ route('admin.quality-document-pages.edit', 'gender-sensitization') }}"
+                   class="sub-link {{ request()->is('admin/quality-document-pages/gender-sensitization*') ? 'active' : '' }}">
+                    <i class="fas fa-venus-mars"></i>
+                    Gender Sensitization
+                </a>
+
+                <a href="{{ route('admin.quality-document-pages.edit', 'placement-cell') }}"
+                   class="sub-link {{ request()->is('admin/quality-document-pages/placement-cell*') ? 'active' : '' }}">
+                    <i class="fas fa-briefcase"></i>
+                    Placement Cell
+                </a>
+
+                <a href="{{ route('admin.quality-document-pages.edit', 'counselling-cell') }}"
+                   class="sub-link {{ request()->is('admin/quality-document-pages/counselling-cell*') ? 'active' : '' }}">
+                    <i class="fas fa-comments"></i>
+                    Counselling Cell
+                </a>
+
+                <a href="{{ route('admin.quality-document-pages.edit', 'skill-development-entrepreneurship-cell') }}"
+                   class="sub-link {{ request()->is('admin/quality-document-pages/skill-development-entrepreneurship-cell*') ? 'active' : '' }}">
+                    <i class="fas fa-lightbulb"></i>
+                    Skill Development
+                </a>
+
+                <a href="{{ route('admin.quality-document-pages.edit', 'departmental-activities') }}"
+                   class="sub-link {{ request()->is('admin/quality-document-pages/departmental-activities*') ? 'active' : '' }}">
+                    <i class="fas fa-calendar-check"></i>
+                    Departmental Activities
+                </a>
+
+                <a href="{{ route('admin.quality-document-pages.edit', 'webinar') }}"
+                   class="sub-link {{ request()->is('admin/quality-document-pages/webinar*') ? 'active' : '' }}">
+                    <i class="fas fa-video"></i>
+                    Webinar
+                </a>
+
+                <a href="{{ route('admin.quality-document-pages.edit', 'workshop-activities') }}"
+                   class="sub-link {{ request()->is('admin/quality-document-pages/workshop-activities*') ? 'active' : '' }}">
+                    <i class="fas fa-tools"></i>
+                    Workshop Activities
+                </a>
+
+                <a href="{{ route('admin.quality-document-pages.edit', 'college-events') }}"
+                   class="sub-link {{ request()->is('admin/quality-document-pages/college-events*') ? 'active' : '' }}">
+                    <i class="fas fa-images"></i>
+                    College Events
+                </a>
+            @endcan
+
+        </div>
+    </div>
+
+    <div class="nav-divider"></div>
+@endif
 
 
         <p class="sidebar-section-title compact nav-label">Account</p>

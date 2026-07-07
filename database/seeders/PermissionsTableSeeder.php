@@ -86,6 +86,22 @@ class PermissionsTableSeeder extends Seeder
                 'id'    => 24,
                 'title' => 'profile_password_edit',
             ],
+            [
+                'id'    => 200,
+                'title' => 'feedback_document_create',
+            ],
+            [
+                'id'    => 201,
+                'title' => 'feedback_document_edit',
+            ],
+            [
+                'id'    => 202,
+                'title' => 'feedback_document_delete',
+            ],
+            [
+                'id'    => 203,
+                'title' => 'feedback_document_access',
+            ],
         ];
 
         Permission::insert($permissions);

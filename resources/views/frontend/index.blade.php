@@ -1262,7 +1262,7 @@
 
 
  <!-- IMPORTANT LINKS START -->
-<section class="important-links-section">
+<section class="important-links-section" id="important-links">
   <div class="links-bg-shape links-bg-shape-1"></div>
   <div class="links-bg-shape links-bg-shape-2"></div>
 
